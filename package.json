@@ -1,0 +1,14 @@
+{
+  "name": "role-based-auth-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:client": "cd client && pnpm dev",
+    "dev:server": "cd server && pnpm dev",
+    "dev": "concurrently \"pnpm:dev:client\" \"pnpm:dev:server\"",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/webhook"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
