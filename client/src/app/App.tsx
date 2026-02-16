@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ClerkProvider } from "@clerk/clerk-react";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { CookieBanner } from "./components/CookieBanner";
@@ -51,124 +50,117 @@ import { SignUpPage } from "./pages/SignUpPage";
 import { Success } from "./pages/Success";
 import { RequireClerkAuth } from "@/auth/RequireClerkAuth";
 
-const CLERK_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!CLERK_KEY) {
-  throw new Error('Missing Clerk Publishable Key');
-}
-
 export default function App() {
   return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-white pt-[81px]">
+        <Navbar />
 
-      <BrowserRouter>
-        <div className="min-h-screen bg-white">
-          <Navbar />
+        <Routes>
+          {/* Public */}
+          <Route path="/" element={<Home />} />
 
-          <Routes>
-            {/* Public */}
-            <Route path="/" element={<Home />} />
+          {/* Auth */}
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/payment-success" element={
+            <RequireClerkAuth>
+              <Success />
+            </RequireClerkAuth>
+          } />
 
-            {/* Auth */}
-            <Route path="/sign-in" element={<SignInPage />} />
-            <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/payment-success" element={
+          {/* GOC */}
+          <Route path="/goc/organisation" element={<Organisation />} />
+          <Route path="/goc/actions" element={<GOCActions />} />
+          <Route path="/goc/charite" element={<GOCCharite />} />
+          <Route path="/goc/fraternite" element={<GOCFraternite />} />
+
+          {/* Formation - Protected by role */}
+          <Route path="/formation" element={<Formation />} />
+          <Route path="/formation/esoterisme" element={
+            <RequireClerkAuth requiredRole="auditeur">
+              <Esoterisme />
+            </RequireClerkAuth>
+          } />
+          <Route path="/formation/philosophie" element={
+            <RequireClerkAuth requiredRole="apprenti">
+              <Philosophie />
+            </RequireClerkAuth>
+          } />
+          <Route path="/formation/pouvoirs" element={
+            <RequireClerkAuth requiredRole="frere-soeur">
+              <Pouvoirs />
+            </RequireClerkAuth>
+          } />
+
+          {/* Bibliothèque - Protected by role */}
+          <Route path="/bibliotheque" element={
+            <RequireClerkAuth requiredRole="auditeur">
+              <Bibliotheque />
+            </RequireClerkAuth>
+          } />
+          <Route path="/bibliotheque/accessoires" element={
+            <RequireClerkAuth requiredRole="auditeur">
+              <Accessoires />
+            </RequireClerkAuth>
+          } />
+          <Route path="/bibliotheque/livres" element={
+            <RequireClerkAuth requiredRole="apprenti">
+              <Livres />
+            </RequireClerkAuth>
+          } />
+          <Route path="/bibliotheque/journaux" element={
+            <RequireClerkAuth requiredRole="apprenti">
+              <Journaux />
+            </RequireClerkAuth>
+          } />
+          <Route path="/bibliotheque/videos" element={
+            <RequireClerkAuth requiredRole="frere-soeur">
+              <BibliothèqueVideos />
+            </RequireClerkAuth>
+          } />
+
+          {/* Devenir membre (marketing pages – public) */}
+          <Route path="/devenir-membre" element={<DevenirMembre />} />
+          <Route path="/devenir-membre/auditeur" element={<ApprenantAuditeur />} />
+          <Route path="/devenir-membre/apprenti" element={<MembreApprenti />} />
+          <Route path="/devenir-membre/frere-soeur" element={<MembreFrereSoeur />} />
+
+          {/* Donation */}
+          <Route path="/donation" element={<Donation />} />
+          <Route path="/donation/charite" element={<DonationCharite />} />
+          <Route path="/donation/soutien" element={<DonationSoutien />} />
+          <Route path="/donation/sympathie" element={<DonationSympathie />} />
+
+          {/* Other public pages */}
+          <Route path="/fraternite" element={<Fraternite />} />
+          <Route path="/seminaires" element={<Seminaires />} />
+          <Route path="/actions" element={<Actions />} />
+          <Route path="/commanderies-fraternelles" element={<CommanderiesFraternelles />} />
+          <Route path="/contacts-commanderies" element={<ContactsCommanderies />} />
+          <Route path="/contact" element={<Contact />} />
+          
+          {/* Videos - Protected by role */}
+          <Route path="/videos" element={
+            <RequireClerkAuth requiredRole="apprenti">
+              <Videos />
+            </RequireClerkAuth>
+          } />
+
+          {/* Member-only (requires any active subscription) */}
+          <Route
+            path="/espace-membre"
+            element={
               <RequireClerkAuth>
-                <Success />
+                <EspaceMembre />
               </RequireClerkAuth>
-            } />
+            }
+          />
+        </Routes>
 
-            {/* GOC */}
-            <Route path="/goc/organisation" element={<Organisation />} />
-            <Route path="/goc/actions" element={<GOCActions />} />
-            <Route path="/goc/charite" element={<GOCCharite />} />
-            <Route path="/goc/fraternite" element={<GOCFraternite />} />
-
-            {/* Formation - Protected by role */}
-            <Route path="/formation" element={<Formation />} />
-            <Route path="/formation/esoterisme" element={
-              <RequireClerkAuth requiredRole="auditeur">
-                <Esoterisme />
-              </RequireClerkAuth>
-            } />
-            <Route path="/formation/philosophie" element={
-              <RequireClerkAuth requiredRole="apprenti">
-                <Philosophie />
-              </RequireClerkAuth>
-            } />
-            <Route path="/formation/pouvoirs" element={
-              <RequireClerkAuth requiredRole="frere-soeur">
-                <Pouvoirs />
-              </RequireClerkAuth>
-            } />
-
-            {/* Bibliothèque - Protected by role */}
-            <Route path="/bibliotheque" element={
-              <RequireClerkAuth requiredRole="auditeur">
-                <Bibliotheque />
-              </RequireClerkAuth>
-            } />
-            <Route path="/bibliotheque/accessoires" element={
-              <RequireClerkAuth requiredRole="auditeur">
-                <Accessoires />
-              </RequireClerkAuth>
-            } />
-            <Route path="/bibliotheque/livres" element={
-              <RequireClerkAuth requiredRole="apprenti">
-                <Livres />
-              </RequireClerkAuth>
-            } />
-            <Route path="/bibliotheque/journaux" element={
-              <RequireClerkAuth requiredRole="apprenti">
-                <Journaux />
-              </RequireClerkAuth>
-            } />
-            <Route path="/bibliotheque/videos" element={
-              <RequireClerkAuth requiredRole="frere-soeur">
-                <BibliothèqueVideos />
-              </RequireClerkAuth>
-            } />
-
-            {/* Devenir membre (marketing pages – public) */}
-            <Route path="/devenir-membre" element={<DevenirMembre />} />
-            <Route path="/devenir-membre/auditeur" element={<ApprenantAuditeur />} />
-            <Route path="/devenir-membre/apprenti" element={<MembreApprenti />} />
-            <Route path="/devenir-membre/frere-soeur" element={<MembreFrereSoeur />} />
-
-            {/* Donation */}
-            <Route path="/donation" element={<Donation />} />
-            <Route path="/donation/charite" element={<DonationCharite />} />
-            <Route path="/donation/soutien" element={<DonationSoutien />} />
-            <Route path="/donation/sympathie" element={<DonationSympathie />} />
-
-            {/* Other public pages */}
-            <Route path="/fraternite" element={<Fraternite />} />
-            <Route path="/seminaires" element={<Seminaires />} />
-            <Route path="/actions" element={<Actions />} />
-            <Route path="/commanderies-fraternelles" element={<CommanderiesFraternelles />} />
-            <Route path="/contacts-commanderies" element={<ContactsCommanderies />} />
-            <Route path="/contact" element={<Contact />} />
-            
-            {/* Videos - Protected by role */}
-            <Route path="/videos" element={
-              <RequireClerkAuth requiredRole="apprenti">
-                <Videos />
-              </RequireClerkAuth>
-            } />
-
-            {/* Member-only (requires any active subscription) */}
-            <Route
-              path="/espace-membre"
-              element={
-                <RequireClerkAuth>
-                  <EspaceMembre />
-                </RequireClerkAuth>
-              }
-            />
-          </Routes>
-
-          <Footer />
-          <CookieBanner />
-        </div>
-      </BrowserRouter>
+        <Footer />
+        <CookieBanner />
+      </div>
+    </BrowserRouter>
   );
 }

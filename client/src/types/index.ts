@@ -1,4 +1,6 @@
 export type UserRole = 'auditeur' | 'apprenti' | 'frere-soeur';
+export type PurchaseType = 'initial' | 'renewal' | 'formation';
+export type FormationType = 'apprenti_trimestre' | 'auditeur_cours';
 
 export interface User {
   id: string;
@@ -6,6 +8,9 @@ export interface User {
   email: string;
   role: UserRole | null;
   role_expires_at: string | null;
+  adhesion_paid: boolean;
+  last_cotisation_date: string | null;
+  formation_credits: number;
   created_at: string;
   updated_at: string;
 }
@@ -21,6 +26,17 @@ export interface Payment {
   created_at: string;
 }
 
+export interface Formation {
+  id: string;
+  user_id: string;
+  formation_type: FormationType;
+  amount: number;
+  credits_added: number;
+  stripe_payment_id: string;
+  status: string;
+  created_at: string;
+}
+
 export interface RoleConfig {
   price: number;
   name: string;
@@ -32,6 +48,8 @@ export interface CheckoutRequest {
   role: UserRole;
   userId: string;
   email: string;
+  purchaseType: PurchaseType;
+  formationType?: FormationType;
 }
 
 export interface CheckoutResponse {
@@ -46,36 +64,38 @@ export const ROLE_HIERARCHY: Record<UserRole, number> = {
 
 export const ROLE_PRICES: Record<UserRole, RoleConfig> = {
   'auditeur': { 
-    price: 30, 
-    name: 'Auditeur', 
-    description: 'Basic access level',
+    price: 0, // Will be calculated from region
+    name: 'Apprenant Auditeur.trice', 
+    description: 'Accès de base aux enseignements',
     features: [
-      'Access to basic content',
-      'Community forum access',
-      'Email support'
+      'Accès aux cours individuels (20€/cours)',
+      'Total: 40 cours disponibles',
+      'Accès au forum communautaire',
+      'Support par email'
     ]
   },
   'apprenti': { 
-    price: 40, 
-    name: 'Apprenti', 
-    description: 'Advanced access level',
+    price: 0, // Will be calculated from region
+    name: 'Membre Apprenti.e', 
+    description: 'Formation complète',
     features: [
-      'All Auditeur features',
-      'Access to advanced content',
-      'Priority support',
-      'Monthly webinars'
+      'Formation par trimestre (100€/trimestre)',
+      'Durée totale: 8 trimestres (2 ans)',
+      'Accès au contenu avancé',
+      'Support prioritaire',
+      'Webinaires mensuels'
     ]
   },
   'frere-soeur': { 
-    price: 50, 
-    name: 'Frère-Soeur', 
-    description: 'Premium access level',
+    price: 0, // Will be calculated from region
+    name: 'Membre Frère.Sœur', 
+    description: 'Accès premium complet',
     features: [
-      'All Apprenti features',
-      'Access to premium content',
-      'One-on-one mentorship',
-      '24/7 priority support',
-      'Exclusive events'
+      'Tous les contenus et formations',
+      'Mentorat individuel',
+      'Support prioritaire 24/7',
+      'Événements exclusifs',
+      'Réseau international'
     ]
   }
 };

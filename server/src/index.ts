@@ -3,10 +3,10 @@ import cors from 'cors';
 import { config } from './config.js';
 import checkoutRouter from './routes/checkout.js';
 import webhookRouter from './routes/webhook.js';
+import regionRouter from './routes/region.js'; // ← Add this
 import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
-
 
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -15,15 +15,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(cors({
+  origin: config.clientUrl,
+  credentials: true,
+}));
 
-app.use(
-  cors({
-    origin: config.clientUrl,
-    credentials: true,
-  })
-);
-
-// IMPORTANT: webhook route needs raw body
 app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 
@@ -32,6 +28,7 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api', checkoutRouter);
+app.use('/api', regionRouter); // ← Add this
 app.use(webhookRouter);
 
 app.use(errorHandler);

@@ -26,7 +26,7 @@ export function Home() {
 
       {/* Main title */}
       <div className="text-center py-16 px-4">
-        <h1 className="text-4xl md:text-6xl font-serif font-bold text-amber-900 mb-2 tracking-tight">
+        <h1 className="text-4xl md:text-6xl font-serif font-bold text-amber-900 mb-2 tracking-tight" style={{ fontFamily: "'Footlight MT', 'Footlight MT Light', 'Times New Roman', serif" }}>
           GRAND ORDRE DU CERCLE
         </h1>
         <div className="w-24 h-1 bg-amber-700 mx-auto mt-6 rounded-full opacity-60" />

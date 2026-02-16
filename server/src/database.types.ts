@@ -10,35 +10,44 @@ export interface Database {
   public: {
     Tables: {
       users: {
-        Row: {
-          id: string
-          clerk_user_id: string
-          email: string
-          role: 'auditeur' | 'apprenti' | 'frere-soeur' | null
-          role_expires_at: string | null
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          clerk_user_id: string
-          email: string
-          role?: 'auditeur' | 'apprenti' | 'frere-soeur' | null
-          role_expires_at?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          clerk_user_id?: string
-          email?: string
-          role?: 'auditeur' | 'apprenti' | 'frere-soeur' | null
-          role_expires_at?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
+  Row: {
+    id: string
+    clerk_user_id: string
+    email: string
+    role: 'auditeur' | 'apprenti' | 'frere-soeur' | null
+    role_expires_at: string | null
+    adhesion_paid: boolean
+    last_cotisation_date: string | null
+    formation_credits: number
+    created_at: string
+    updated_at: string
+  }
+  Insert: {
+    id?: string
+    clerk_user_id: string
+    email: string
+    role?: 'auditeur' | 'apprenti' | 'frere-soeur' | null
+    role_expires_at?: string | null
+    adhesion_paid?: boolean
+    last_cotisation_date?: string | null
+    formation_credits?: number
+    created_at?: string
+    updated_at?: string
+  }
+  Update: {
+    id?: string
+    clerk_user_id?: string
+    email?: string
+    role?: 'auditeur' | 'apprenti' | 'frere-soeur' | null
+    role_expires_at?: string | null
+    adhesion_paid?: boolean
+    last_cotisation_date?: string | null
+    formation_credits?: number
+    created_at?: string
+    updated_at?: string
+  }
+  Relationships: []
+}
       payments: {
         Row: {
           id: string
@@ -79,6 +88,39 @@ export interface Database {
           }
         ]
       }
+      formations: {
+  Row: {
+    id: string
+    user_id: string
+    formation_type: 'apprenti_trimestre' | 'auditeur_cours'
+    amount: number
+    credits_added: number
+    stripe_payment_id: string
+    status: string
+    created_at: string
+  }
+  Insert: {
+    id?: string
+    user_id: string
+    formation_type: 'apprenti_trimestre' | 'auditeur_cours'
+    amount: number
+    credits_added: number
+    stripe_payment_id: string
+    status: string
+    created_at?: string
+  }
+  Update: {
+    id?: string
+    user_id?: string
+    formation_type?: 'apprenti_trimestre' | 'auditeur_cours'
+    amount?: number
+    credits_added?: number
+    stripe_payment_id?: string
+    status?: string
+    created_at?: string
+  }
+  Relationships: []
+}
     }
     Views: {
       [_ in never]: never

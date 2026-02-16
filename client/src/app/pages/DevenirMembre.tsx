@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { useUserRole } from "@/hooks/useUserRole";
+import { useRegionalPricing } from "@/hooks/useRegionalPricing";
 import { ROLE_PRICES } from "@/types/index";
-import type { UserRole, CheckoutRequest, CheckoutResponse } from "@/types/index";
+import type { UserRole, CheckoutRequest, CheckoutResponse, PurchaseType, FormationType } from "@/types/index";
 import {
   Card,
   CardContent,
@@ -14,8 +15,9 @@ import {
 } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 import { Badge } from "@/app/components/ui/badge";
-import { Check, Crown, Sparkles, Star, ArrowRight } from "lucide-react";
+import { Check, Crown, Sparkles, Star, ArrowRight, Info } from "lucide-react";
 import { Alert, AlertDescription } from "@/app/components/ui/alert";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
 
 const roleIcons: Record<UserRole, any> = {
   auditeur: Star,
@@ -32,6 +34,7 @@ const roleRoutes: Record<UserRole, string> = {
 export function DevenirMembre() {
   const { user, isSignedIn } = useUser();
   const { userRole, isExpired } = useUserRole();
+  const { pricing, loading: pricingLoading } = useRegionalPricing();
   const navigate = useNavigate();
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -40,14 +43,18 @@ export function DevenirMembre() {
     navigate(roleRoutes[role]);
   };
 
-  const handlePurchase = async (role: UserRole) => {
+  const handlePurchase = async (
+    role: UserRole, 
+    purchaseType: PurchaseType,
+    formationType?: FormationType
+  ) => {
     if (!isSignedIn) {
       navigate("/sign-up");
       return;
     }
     if (!user) return;
 
-    setLoading(role);
+    setLoading(`${role}-${purchaseType}`);
     setError(null);
 
     try {
@@ -55,19 +62,17 @@ export function DevenirMembre() {
         role,
         userId: user.id,
         email: user.primaryEmailAddress?.emailAddress || "",
+        purchaseType,
+        formationType,
       };
 
-      // Recommended in dev: use Vite proxy and call relative URL.
-      // If you do not use a proxy, replace with:
-      // `${import.meta.env.VITE_API_URL}/api/create-checkout`
-      const response = await fetch("/api/create-checkout", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/create-checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
-        // Avoid crashing when backend returns HTML/empty body on errors.
         const text = await response.text();
         try {
           const parsed = JSON.parse(text);
@@ -87,9 +92,12 @@ export function DevenirMembre() {
     }
   };
 
+  // Determine purchase type for user
+  const shouldShowRenewal = userRole && pricing?.adhesionPaid;
+  const shouldShowInitial = !userRole || (userRole && isExpired);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50">
-      {/* Hero Section */}
       <div className="container max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-6 text-amber-900">
@@ -109,6 +117,12 @@ export function DevenirMembre() {
               {isExpired && "(Expiré)"}
             </Badge>
           )}
+{/* 
+          {pricing && (
+            <div className="mt-4 text-sm text-gray-600">
+              Tarifs: {pricing.regionName}
+            </div>
+          )} */}
         </div>
 
         {error && (
@@ -117,130 +131,287 @@ export function DevenirMembre() {
           </Alert>
         )}
 
-        {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {(Object.entries(ROLE_PRICES) as [
-            UserRole,
-            (typeof ROLE_PRICES)[UserRole]
-          ][]).map(([roleKey, config]) => {
-            const Icon = roleIcons[roleKey];
-            const isCurrentRole = userRole === roleKey && !isExpired;
-            const isPremium = roleKey === "frere-soeur";
+        {/* Membership Tabs */}
+        <Tabs defaultValue="membership" className="mb-16">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
+            <TabsTrigger value="membership">Adhésion</TabsTrigger>
+            <TabsTrigger value="formation">Formation</TabsTrigger>
+          </TabsList>
 
-            return (
-              <Card
-                key={roleKey}
-                className={`relative transition-all hover:shadow-xl ${
-                  isPremium
-                    ? "border-amber-500 shadow-lg scale-105"
-                    : "border-amber-200"
-                }`}
-              >
-                {isPremium && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <Badge className="bg-amber-600 text-white">
-                      Le Plus Populaire
-                    </Badge>
-                  </div>
+          <TabsContent value="membership" className="mt-8">
+            {pricingLoading ? (
+              <div className="grid md:grid-cols-3 gap-8">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="border rounded-lg p-6 animate-pulse bg-gray-100 h-96" />
+                ))}
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-3 gap-8">
+                {(Object.entries(ROLE_PRICES) as [UserRole, typeof ROLE_PRICES[UserRole]][]).map(
+                  ([roleKey, config]) => {
+                    const Icon = roleIcons[roleKey];
+                    const isCurrentRole = userRole === roleKey && !isExpired;
+                    const isPremium = roleKey === "frere-soeur";
+
+                    return (
+                      <Card
+                        key={roleKey}
+                        className={`relative transition-all hover:shadow-xl ${
+                          isPremium ? "border-amber-500 shadow-lg scale-105" : "border-amber-200"
+                        }`}
+                      >
+                        {isPremium && (
+                          <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                            <Badge className="bg-amber-600 text-white">Le Plus Populaire</Badge>
+                          </div>
+                        )}
+
+                        <CardHeader className="text-center">
+                          <div className="flex justify-center mb-4">
+                            <Icon className="h-12 w-12 text-amber-600" />
+                          </div>
+
+                          {isCurrentRole && (
+                            <Badge variant="secondary" className="mb-2">
+                              Actif
+                            </Badge>
+                          )}
+
+                          <CardTitle className="text-2xl text-amber-900">{config.name}</CardTitle>
+                          <CardDescription className="text-base">
+                            {config.description}
+                          </CardDescription>
+                        </CardHeader>
+
+                        <CardContent className="space-y-6">
+                          {pricing && (
+                            <div className="bg-amber-50 rounded-lg p-4 space-y-3">
+                              <div className="flex justify-between items-center text-sm">
+                                <span className="text-gray-700">Adhésion (une fois)</span>
+                                <span className="font-semibold text-amber-900">
+                                  €{pricing.prices.adhesion}
+                                </span>
+                              </div>
+                              <div className="flex justify-between items-center text-sm">
+                                <span className="text-gray-700">Cotisation (par an)</span>
+                                <span className="font-semibold text-amber-900">
+                                  €{pricing.prices.cotisation}
+                                </span>
+                              </div>
+                              <div className="border-t border-amber-200 pt-2 flex justify-between items-center">
+                                <span className="font-semibold text-gray-900">
+                                  {pricing.adhesionPaid ? "Renouvellement" : "Première année"}
+                                </span>
+                                <span className="text-2xl font-bold text-amber-900">
+                                  €{pricing.adhesionPaid ? pricing.prices.renewal : pricing.prices.initial}
+                                </span>
+                              </div>
+                            </div>
+                          )}
+
+                          <ul className="space-y-3">
+                            {config.features.map((feature: string, index: number) => (
+                              <li key={index} className="flex items-start">
+                                <Check className="h-5 w-5 text-amber-600 mr-3 flex-shrink-0 mt-0.5" />
+                                <span className="text-sm text-gray-700">{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+
+                        <CardFooter className="flex flex-col gap-3">
+                          {!isCurrentRole && (
+                            <Button
+                              className={`w-full ${
+                                isPremium
+                                  ? "bg-amber-600 hover:bg-amber-700"
+                                  : "bg-amber-500 hover:bg-amber-600"
+                              }`}
+                              onClick={() =>
+                                handlePurchase(
+                                  roleKey,
+                                  pricing?.adhesionPaid ? "renewal" : "initial"
+                                )
+                              }
+                              disabled={loading !== null}
+                            >
+                              {loading === `${roleKey}-${pricing?.adhesionPaid ? "renewal" : "initial"}` ? (
+                                <>
+                                  <span className="animate-spin mr-2">⏳</span>
+                                  Traitement...
+                                </>
+                              ) : isSignedIn ? (
+                                <>
+                                  {pricing?.adhesionPaid ? "Renouveler" : "Devenir Membre"}
+                                  <ArrowRight className="ml-2 h-4 w-4" />
+                                </>
+                              ) : (
+                                "S'inscrire et Acheter"
+                              )}
+                            </Button>
+                          )}
+
+                          {isCurrentRole && (
+                            <Badge className="w-full py-2 justify-center bg-green-600">
+                              Abonnement Actif
+                            </Badge>
+                          )}
+
+                          <Button
+                            variant="outline"
+                            className="w-full border-amber-600 text-amber-600 hover:bg-amber-50"
+                            onClick={() => handleLearnMore(roleKey)}
+                          >
+                            En Savoir Plus
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    );
+                  }
                 )}
+              </div>
+            )}
+          </TabsContent>
 
-                <CardHeader className="text-center">
-                  <div className="flex justify-center mb-4">
-                    <Icon className="h-12 w-12 text-amber-600" />
-                  </div>
+          <TabsContent value="formation" className="mt-8">
+            <div className="max-w-4xl mx-auto space-y-6">
+              <Alert className="border-amber-200 bg-amber-50">
+                <Info className="h-4 w-4 text-amber-600" />
+                <AlertDescription className="text-amber-900">
+                  Les formations sont accessibles après avoir souscrit à une adhésion
+                </AlertDescription>
+              </Alert>
 
-                  {isCurrentRole && (
-                    <Badge variant="secondary" className="mb-2">
-                      Actif
-                    </Badge>
-                  )}
-
-                  <CardTitle className="text-2xl text-amber-900">
-                    {config.name}
+              {/* Apprenti Formation */}
+              <Card className="border-amber-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3">
+                    <Sparkles className="h-8 w-8 text-amber-600" />
+                    Formation Membre Apprenti.e
                   </CardTitle>
-                  <CardDescription className="text-base">
-                    {config.description}
+                  <CardDescription>
+                    Formation complète par trimestre
                   </CardDescription>
                 </CardHeader>
-
-                <CardContent className="space-y-6">
-                  <div className="text-center">
-                    <span className="text-5xl font-bold text-amber-900">
-                      €{config.price}
-                    </span>
-                    <span className="text-gray-600">/an</span>
+                <CardContent className="space-y-4">
+                  <div className="bg-amber-50 rounded-lg p-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-semibold">Prix par trimestre</span>
+                      <span className="text-2xl font-bold text-amber-900">
+                        €{pricing?.formation.apprenti_trimestre || 100}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600">Durée totale: 8 trimestres (2 ans)</p>
+                    <p className="text-sm text-gray-600">
+                      Coût total: €{(pricing?.formation.apprenti_trimestre || 100) * 8}
+                    </p>
                   </div>
-
-                  <ul className="space-y-3">
-                    {config.features.map((feature: string, index: number) => (
-                      <li key={index} className="flex items-start">
-                        <Check className="h-5 w-5 text-amber-600 mr-3 flex-shrink-0 mt-0.5" />
-                        <span className="text-sm text-gray-700">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm">Enseignements approfondis chaque trimestre</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm">Suivi personnalisé de votre progression</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm">Accès aux ressources exclusives</span>
+                    </li>
                   </ul>
                 </CardContent>
-
-                <CardFooter className="flex flex-col gap-3">
+                <CardFooter>
                   <Button
-                    className={`w-full ${
-                      isPremium
-                        ? "bg-amber-600 hover:bg-amber-700"
-                        : "bg-amber-500 hover:bg-amber-600"
-                    }`}
-                    onClick={() => handlePurchase(roleKey)}
-                    disabled={loading !== null || isCurrentRole}
+                    className="w-full bg-amber-600 hover:bg-amber-700"
+                    onClick={() => handlePurchase("apprenti", "formation", "apprenti_trimestre")}
+                    disabled={!userRole || loading !== null}
                   >
-                    {loading === roleKey ? (
+                    {loading === "apprenti-formation" ? (
                       <>
                         <span className="animate-spin mr-2">⏳</span>
                         Traitement...
                       </>
-                    ) : isCurrentRole ? (
-                      "Abonnement Actuel"
+                    ) : !userRole ? (
+                      "Adhésion requise"
                     ) : (
-                      <>
-                        {isSignedIn ? "Acheter Maintenant" : "S'inscrire et Acheter"}
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </>
+                      "Acheter 1 Trimestre"
                     )}
-                  </Button>
-
-                  <Button
-                    variant="outline"
-                    className="w-full border-amber-600 text-amber-600 hover:bg-amber-50"
-                    onClick={() => handleLearnMore(roleKey)}
-                  >
-                    En Savoir Plus
                   </Button>
                 </CardFooter>
               </Card>
-            );
-          })}
-        </div>
+
+              {/* Auditeur Formation */}
+              <Card className="border-amber-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3">
+                    <Star className="h-8 w-8 text-amber-600" />
+                    Formation Apprenant Auditeur.trice
+                  </CardTitle>
+                  <CardDescription>Cours individuels à l&apos;unité</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="bg-amber-50 rounded-lg p-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="font-semibold">Prix par cours</span>
+                      <span className="text-2xl font-bold text-amber-900">
+                        €{pricing?.formation.auditeur_cours || 20}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600">Total de 40 cours disponibles</p>
+                    <p className="text-sm text-gray-600">
+                      Coût total complet: €{(pricing?.formation.auditeur_cours || 20) * 40}
+                    </p>
+                  </div>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm">Flexibilité d&apos;achat à votre rythme</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm">Accès immédiat au cours acheté</span>
+                    </li>
+                    <li className="flex items-start">
+                      <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm">Contenu riche et détaillé</span>
+                    </li>
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button
+                    className="w-full bg-amber-600 hover:bg-amber-700"
+                    onClick={() => handlePurchase("auditeur", "formation", "auditeur_cours")}
+                    disabled={!userRole || loading !== null}
+                  >
+                    {loading === "auditeur-formation" ? (
+                      <>
+                        <span className="animate-spin mr-2">⏳</span>
+                        Traitement...
+                      </>
+                    ) : !userRole ? (
+                      "Adhésion requise"
+                    ) : (
+                      "Acheter 1 Cours"
+                    )}
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
+          </TabsContent>
+        </Tabs>
 
         {/* Additional Information */}
         <div className="max-w-4xl mx-auto mt-16">
           <Card className="border-amber-200">
             <CardHeader>
-              <CardTitle className="text-2xl text-amber-900">
-                Pourquoi Devenir Membre ?
-              </CardTitle>
+              <CardTitle className="text-2xl text-amber-900">Pourquoi Devenir Membre ?</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-gray-700">
               <p>
-                En rejoignant notre ordre, vous accédez à une communauté dédiée
-                à l&apos;éveil spirituel, à la connaissance ésotérique et à
-                l&apos;entraide fraternelle.
+                En rejoignant notre ordre, vous accédez à une communauté dédiée à l&apos;éveil
+                spirituel, à la connaissance ésotérique et à l&apos;entraide fraternelle.
               </p>
-              <p>
-                Chaque niveau d&apos;adhésion offre des avantages progressifs,
-                vous permettant d&apos;approfondir votre engagement selon votre
-                propre rythme et vos aspirations.
-              </p>
-
               <ul className="space-y-2 ml-6">
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />

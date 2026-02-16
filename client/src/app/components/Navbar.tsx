@@ -1,180 +1,265 @@
 import { Link } from "react-router-dom";
 import logo from "@/assets/logoGOC.png";
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { ChevronDown, Menu, X, Sparkles, BookOpen, Users, Heart, GraduationCap } from "lucide-react";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
+
+const navIcons: Record<string, React.ReactNode> = {
+  GOC: <Sparkles className="w-4 h-4" />,
+  Formation: <GraduationCap className="w-4 h-4" />,
+  Bibliothèque: <BookOpen className="w-4 h-4" />,
+  "Devenir Membre": <Users className="w-4 h-4" />,
+  Donation: <Heart className="w-4 h-4" />,
+};
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleMouseEnter = (label: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setOpenDropdown(label);
+    setActiveItem(label);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null);
+      setActiveItem(null);
+    }, 150);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null);
+        setActiveItem(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const navigationItems = [
     {
       label: "GOC",
       items: [
-        { label: "Organisation", path: "/goc/organisation" },
-        { label: "Actions", path: "/goc/actions" },
-        { label: "Charité", path: "/goc/charite" },
-        { label: "Fraternité", path: "/goc/fraternite" },
+        { label: "Organisation", path: "/goc/organisation", desc: "Notre structure" },
+        { label: "Actions", path: "/goc/actions", desc: "Nos initiatives" },
+        { label: "Charité", path: "/goc/charite", desc: "Œuvres philanthropiques" },
+        { label: "Fraternité", path: "/goc/fraternite", desc: "Liens spirituels" },
       ],
     },
     {
       label: "Formation",
       items: [
-        { label: "Ésotérisme", path: "/formation/esoterisme" },
-        { label: "Philosophie", path: "/formation/philosophie" },
-        { label: "Pouvoirs", path: "/formation/pouvoirs" },
+        { label: "Ésotérisme", path: "/formation/esoterisme", desc: "Mystères anciens" },
+        { label: "Philosophie", path: "/formation/philosophie", desc: "Pensée sacrée" },
+        { label: "Pouvoirs", path: "/formation/pouvoirs", desc: "Développement intérieur" },
       ],
     },
     {
       label: "Bibliothèque",
       items: [
-        { label: "Accessoires rituels", path: "/bibliotheque/accessoires" },
-        { label: "Livres", path: "/bibliotheque/livres" },
-        { label: "Journaux", path: "/bibliotheque/journaux" },
-        { label: "Vidéos", path: "/bibliotheque/videos" },
+        { label: "Accessoires rituels", path: "/bibliotheque/accessoires", desc: "Outils sacrés" },
+        { label: "Livres", path: "/bibliotheque/livres", desc: "Savoir ancestral" },
+        { label: "Journaux", path: "/bibliotheque/journaux", desc: "Publications" },
+        { label: "Vidéos", path: "/bibliotheque/videos", desc: "Enseignements" },
       ],
     },
     {
       label: "Devenir Membre",
       items: [
-        { label: "Membre apprenti-e", path: "/devenir-membre/apprenti" },
-        { label: "Membre frère-sœur", path: "/devenir-membre/frere-soeur" },
-        { label: "Apprenant auditeur-trice", path: "/devenir-membre/auditeur" },
+        { label: "Membre apprenti-e", path: "/devenir-membre/apprenti", desc: "Premiers pas" },
+        { label: "Membre frère-sœur", path: "/devenir-membre/frere-soeur", desc: "Engagement" },
+        { label: "Apprenant auditeur-trice", path: "/devenir-membre/auditeur", desc: "Découverte" },
       ],
     },
     {
       label: "Donation",
       items: [
-        { label: "Charité", path: "/donation/charite" },
-        { label: "Soutien", path: "/donation/soutien" },
-        { label: "Sympathie", path: "/donation/sympathie" },
+        { label: "Charité", path: "/donation/charite", desc: "Aider autrui" },
+        { label: "Soutien", path: "/donation/soutien", desc: "Contribuer" },
+        { label: "Sympathie", path: "/donation/sympathie", desc: "Participer" },
       ],
     },
   ];
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4">
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled 
+          ? "bg-white/95 backdrop-blur-md shadow-lg shadow-amber-900/5" 
+          : "bg-gradient-to-b from-white to-amber-50/30"
+      }`}
+    >
+      <div className="h-1 bg-gradient-to-r from-amber-700 via-amber-500 to-amber-700" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition">
-            <img src={logo} alt="Goc" className="h-12 w-12" />
-            <span className="font-serif text-xl font-bold text-amber-900">GOC</span>
+          <Link to="/" className="flex items-center gap-3 group relative">
+            <div className="relative">
+              <img src={logo} alt="GOC" className="h-12 w-12 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" />
+              <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-serif text-2xl font-bold bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text text-transparent tracking-tight">
+                GOC
+              </span>
+              <span className="text-xs text-amber-700/60 font-medium tracking-widest uppercase">
+                Grand Ordre du Cercle
+              </span>
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1" ref={dropdownRef}>
             {navigationItems.map((item) => (
               <div
                 key={item.label}
-                className="relative group"
-                onMouseEnter={() => setOpenDropdown(item.label)}
-                onMouseLeave={() => setOpenDropdown(null)}
+                className="relative"
+                onMouseEnter={() => handleMouseEnter(item.label)}
+                onMouseLeave={handleMouseLeave}
               >
-                <button className="text-gray-700 hover:text-amber-700 transition font-medium px-3 py-2 rounded-md hover:bg-amber-50 flex items-center gap-1">
+                <button className={`relative px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 flex items-center gap-2 group ${
+                  activeItem === item.label ? "text-amber-800 bg-amber-100/50" : "text-gray-600 hover:text-amber-700 hover:bg-amber-50"
+                }`}>
+                  <span className={`transition-transform duration-300 ${activeItem === item.label ? "scale-110" : "group-hover:scale-110"}`}>
+                    {navIcons[item.label]}
+                  </span>
                   {item.label}
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${openDropdown === item.label ? "rotate-180" : ""}`} />
+                  <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-amber-600 transition-all duration-300 ${
+                    activeItem === item.label ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                  }`} />
                 </button>
                 
-                {/* Dropdown */}
-                <div
-                  className={`absolute left-0 mt-0 w-56 bg-white shadow-lg rounded-md border border-amber-100 overflow-hidden transition-all duration-200 ${
-                    openDropdown === item.label ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
-                  }`}
-                >
-                  {item.items.map((subItem) => (
-                    <Link
-                      key={subItem.path}
-                      to={subItem.path}
-                      className="block px-4 py-3 text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition"
-                    >
-                      {subItem.label}
-                    </Link>
-                  ))}
+                <div className={`absolute left-0 top-full pt-2 w-72 transition-all duration-300 origin-top ${
+                  openDropdown === item.label ? "opacity-100 visible scale-100 translate-y-0" : "opacity-0 invisible scale-95 -translate-y-2 pointer-events-none"
+                }`}>
+                  <div className="bg-white rounded-2xl shadow-2xl shadow-amber-900/10 border border-amber-100 overflow-hidden"
+                    onMouseEnter={() => handleMouseEnter(item.label)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <div className="p-2">
+                      <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider px-3 py-2 border-b border-amber-100 mb-1">
+                        {item.label}
+                      </div>
+                      {item.items.map((subItem) => (
+                        <Link
+                          key={subItem.path}
+                          to={subItem.path}
+                          className="group/item flex items-start gap-3 px-3 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-amber-50 hover:to-amber-100/50 hover:text-amber-800 transition-all duration-200"
+                          onClick={() => { setOpenDropdown(null); setActiveItem(null); }}
+                        >
+                          <div className="flex-1">
+                            <div className="font-medium text-sm">{subItem.label}</div>
+                            <div className="text-xs text-gray-400 group-hover/item:text-amber-600/70 transition-colors">{subItem.desc}</div>
+                          </div>
+                          <ChevronDown className="w-4 h-4 rotate-[-90deg] opacity-0 group-hover/item:opacity-100 transition-all text-amber-600" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
             
-            <Link
-              to="/espace-membre"
-              className="text-gray-700 hover:text-amber-700 transition font-medium px-3 py-2 rounded-md hover:bg-amber-50"
-            >
+            <div className="h-6 w-px bg-amber-200 mx-2" />
+            
+            <Link to="/espace-membre" className="px-4 py-2 rounded-full font-medium text-sm text-amber-700 hover:text-amber-800 hover:bg-amber-100 transition-all duration-300 flex items-center gap-2">
+              <Users className="w-4 h-4" />
               Espace Membre
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <button 
-            className="lg:hidden p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden pb-4 border-t border-amber-100">
-            {navigationItems.map((item) => (
-              <div key={item.label} className="py-2">
-                <button
-                  onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
-                  className="w-full text-left px-4 py-2 text-gray-700 font-medium flex items-center justify-between"
-                >
-                  {item.label}
-                  <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === item.label ? "rotate-180" : ""}`} />
-                </button>
-                {openDropdown === item.label && (
-                  <div className="bg-amber-50">
-                    {item.items.map((subItem) => (
-                      <Link
-                        key={subItem.path}
-                        to={subItem.path}
-                        className="block px-8 py-2 text-gray-600 hover:text-amber-700"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {subItem.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+          <div className="flex items-center gap-3">
+            <SignedIn>
+              <div className="flex items-center gap-3 pl-4 border-l border-amber-200">
+                <span className="text-sm text-gray-500 hidden xl:block">Mon compte</span>
+                <UserButton afterSignOutUrl="/" appearance={{ elements: { avatarBox: "w-10 h-10 ring-2 ring-amber-200 ring-offset-2", userButtonPopoverCard: "shadow-2xl shadow-amber-900/10 border-amber-100" } }} />
               </div>
-            ))}
-            <Link
-              to="/espace-membre"
-              className="block px-4 py-2 text-gray-700 font-medium"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Espace Membre
-            </Link>
+            </SignedIn>
+            
+            <SignedOut>
+              <div className="hidden sm:flex items-center gap-2">
+                <Link to="/sign-in">
+                  <Button variant="ghost" className="text-gray-600 hover:text-amber-700 hover:bg-amber-50 rounded-full px-6">Connexion</Button>
+                </Link>
+                <Link to="/sign-up">
+                  <Button className="bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-800 hover:to-amber-700 text-white rounded-full px-6 shadow-lg shadow-amber-900/20 hover:shadow-amber-900/30 transition-all duration-300 hover:-translate-y-0.5">
+                    S'inscrire
+                  </Button>
+                </Link>
+              </div>
+            </SignedOut>
+
+            <button className="lg:hidden p-2 rounded-full hover:bg-amber-50 transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}>
+              {mobileMenuOpen ? <X className="w-6 h-6 text-amber-800" /> : <Menu className="w-6 h-6 text-gray-700" />}
+            </button>
           </div>
-        )}
-        <div className="flex items-center gap-4">
-          <SignedIn>
-            {/* Clerk's pre-built user button with dropdown menu */}
-            <UserButton 
-              afterSignOutUrl="/"
-              appearance={{
-                elements: {
-                  avatarBox: "w-10 h-10"
-                }
-              }}
-            />
-          </SignedIn>
-          
+        </div>
+      </div>
+
+      <div className={`lg:hidden fixed inset-0 top-[81px] bg-black/20 backdrop-blur-sm transition-opacity duration-300 ${
+        mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+      }`} onClick={() => setMobileMenuOpen(false)} />
+
+      <div className={`lg:hidden fixed top-[81px] left-0 right-0 bg-white border-t border-amber-100 shadow-2xl transition-all duration-500 max-h-[calc(100vh-81px)] overflow-y-auto ${
+        mobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0 pointer-events-none"
+      }`}>
+        <div className="p-4 space-y-2">
+          {navigationItems.map((item) => (
+            <div key={item.label} className="border-b border-amber-50 last:border-0 pb-2">
+              <button onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)} className={`w-full text-left px-4 py-4 rounded-xl font-medium flex items-center justify-between transition-all duration-300 ${
+                openDropdown === item.label ? "bg-amber-100 text-amber-800" : "text-gray-700 hover:bg-amber-50"
+              }`}>
+                <div className="flex items-center gap-3">
+                  <span className={openDropdown === item.label ? "text-amber-600" : "text-gray-400"}>{navIcons[item.label]}</span>
+                  {item.label}
+                </div>
+                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${openDropdown === item.label ? "rotate-180 text-amber-600" : ""}`} />
+              </button>
+              <div className={`overflow-hidden transition-all duration-300 ${openDropdown === item.label ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+                <div className="pl-12 pr-4 py-2 space-y-1">
+                  {item.items.map((subItem) => (
+                    <Link key={subItem.path} to={subItem.path} className="block py-3 px-4 rounded-lg text-gray-600 hover:text-amber-700 hover:bg-amber-50 transition-colors text-sm" onClick={() => setMobileMenuOpen(false)}>
+                      <div className="font-medium">{subItem.label}</div>
+                      <div className="text-xs text-gray-400 mt-0.5">{subItem.desc}</div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+          <Link to="/espace-membre" className="flex items-center gap-3 px-4 py-4 rounded-xl text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition-colors font-medium" onClick={() => setMobileMenuOpen(false)}>
+            <Users className="w-5 h-5" />
+            Espace Membre
+          </Link>
           <SignedOut>
-            <Link to="/sign-in">
-              <Button variant="outline">Se connecter</Button>
-            </Link>
-            <Link to="/sign-up">
-              <Button className="bg-amber-600 hover:bg-amber-700">
-                S'inscrire
-              </Button>
-            </Link>
+            <div className="pt-4 space-y-3 px-4">
+              <Link to="/sign-in" className="block">
+                <Button variant="outline" className="w-full rounded-xl border-amber-200 text-amber-700 hover:bg-amber-50">Se connecter</Button>
+              </Link>
+              <Link to="/sign-up" className="block">
+                <Button className="w-full rounded-xl bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-800 hover:to-amber-700">S'inscrire</Button>
+              </Link>
+            </div>
           </SignedOut>
         </div>
       </div>

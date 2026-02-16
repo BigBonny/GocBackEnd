@@ -13,6 +13,22 @@ export function GOCFraternite() {
           La Fraternité Universelle
         </h1>
 
+        {/* New section: Notre Fraternité */}
+        <div className="bg-gradient-to-br from-amber-100 to-orange-50 shadow-xl rounded-lg p-8 mb-8 border-2 border-amber-300">
+          <h2 className="text-3xl font-serif text-amber-900 mb-6 text-center">
+            Notre Fraternité
+          </h2>
+          <p className="text-gray-800 leading-relaxed text-lg text-center max-w-4xl mx-auto">
+            La Fraternité du Grand Ordre du Cercle est une communauté de femmes et d'hommes, 
+            sans exclusive, de toutes races, de toutes ethnies, de tous pays et de toutes nationalités, 
+            qui acceptent volontairement et sans contrainte d'aucune sorte, d'aucune nature, de{" "}
+            <span className="font-bold text-amber-900">DEVENIR MEMBRE</span> et s'engagent à{" "}
+            <span className="font-bold text-amber-900">RESPECTER</span> scrupuleusement{" "}
+            <span className="font-bold text-amber-900">LA RÈGLE en XII Principes</span> qui régit{" "}
+            <span className="font-bold text-amber-900">LA VIE</span> de l'Organisation du Grand Ordre du Cercle.
+          </p>
+        </div>
+
         <div className="bg-white shadow-lg rounded-lg p-8 mb-8">
           <h2 className="text-2xl font-serif text-amber-800 mb-4">Un Lien qui Transcende</h2>
           <p className="text-gray-700 mb-6 leading-relaxed text-lg">

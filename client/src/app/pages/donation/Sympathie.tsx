@@ -13,6 +13,19 @@ export function DonationSympathie() {
           Don de Sympathie
         </h1>
 
+        {/* New section: Donation info */}
+        <div className="bg-gradient-to-br from-amber-100 to-orange-50 shadow-xl rounded-lg p-8 mb-8 border-2 border-amber-300 text-center">
+          <h2 className="text-2xl font-serif text-amber-900 mb-4">Votre Générosité en Action</h2>
+          <p className="text-gray-800 leading-relaxed text-lg mb-4">
+            Le minimum ou plus de votre donation est une générosité qui nous permet de planifier nos actions 
+            d'aide et de solidarité envers des personnes qui en ont besoin.
+          </p>
+          <div className="inline-block bg-white rounded-lg px-8 py-4 shadow-md border-2 border-amber-400">
+            <p className="text-sm text-gray-600 mb-2">Don de Sympathie minimum</p>
+            <p className="text-4xl font-bold text-amber-900">25€</p>
+          </div>
+        </div>
+
         <div className="bg-white shadow-lg rounded-lg p-8 mb-8">
           <h2 className="text-2xl font-serif text-amber-800 mb-4">Un Geste du Cœur</h2>
           <p className="text-gray-700 mb-6 leading-relaxed">
@@ -25,7 +38,7 @@ export function DonationSympathie() {
             <h3 className="text-xl font-semibold text-amber-900 mb-3">Une Liberté Totale</h3>
             <p className="text-gray-700">
               Contrairement aux autres formes de donation, le don de sympathie est entièrement libre : 
-              montant libre, fréquence libre, anonymat possible. C'est simplement un moyen d'exprimer 
+              montant libre (minimum 25€), fréquence libre, anonymat possible. C'est simplement un moyen d'exprimer 
               votre appréciation pour le travail de l'Ordre et de contribuer, à votre mesure, 
               à la préservation de la tradition ésotérique.
             </p>
@@ -61,21 +74,21 @@ export function DonationSympathie() {
             <div className="bg-amber-50 p-6 rounded-lg border-2 border-amber-200">
               <h3 className="text-xl font-semibold text-amber-900 mb-4">Comment est-il utilisé ?</h3>
               <p className="text-gray-700 mb-4">
-                Les dons de sympathie contribuent globalement au fonctionnement de l'Ordre. 
+                Les dons de sympathie contribuent à nos actions d'aide et de solidarité. 
                 Ils sont utilisés là où le besoin se fait le plus sentir :
               </p>
               <ul className="space-y-2 text-gray-700 text-sm">
                 <li className="flex items-start gap-2">
                   <span className="text-amber-700">•</span>
-                  <span>Amélioration de nos services</span>
+                  <span>Aide aux personnes en difficulté</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-700">•</span>
+                  <span>Actions de solidarité communautaire</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-amber-700">•</span>
                   <span>Développement de nouveaux contenus gratuits</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-700">•</span>
-                  <span>Aides ponctuelles aux membres en difficulté</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-amber-700">•</span>
@@ -136,38 +149,37 @@ export function DonationSympathie() {
         <div className="bg-gradient-to-br from-amber-700 to-amber-600 text-white rounded-lg p-8">
           <h2 className="text-2xl font-serif mb-4 text-center">Faire un Don de Sympathie</h2>
           <p className="text-center text-amber-50 mb-8 max-w-2xl mx-auto">
-            Choisissez le montant qui vous parle, aucun montant n'est trop petit. 
-            Chaque geste compte et est apprécié.
+            Montant minimum : 25€. Chaque geste compte et est apprécié.
           </p>
           
           <form className="max-w-2xl mx-auto space-y-6">
             <div>
               <label className="block text-sm font-medium mb-3 text-center">
-                Montant de votre don (montant libre)
+                Montant de votre don (minimum 25€)
               </label>
               <div className="grid grid-cols-5 gap-3 mb-3">
                 <button type="button" className="bg-white/20 hover:bg-white/30 border-2 border-white py-3 rounded-md transition">
-                  5€
-                </button>
-                <button type="button" className="bg-white/20 hover:bg-white/30 border-2 border-white py-3 rounded-md transition">
-                  10€
-                </button>
-                <button type="button" className="bg-white/20 hover:bg-white/30 border-2 border-white py-3 rounded-md transition">
-                  20€
+                  25€
                 </button>
                 <button type="button" className="bg-white/20 hover:bg-white/30 border-2 border-white py-3 rounded-md transition">
                   50€
                 </button>
                 <button type="button" className="bg-white/20 hover:bg-white/30 border-2 border-white py-3 rounded-md transition">
+                  75€
+                </button>
+                <button type="button" className="bg-white/20 hover:bg-white/30 border-2 border-white py-3 rounded-md transition">
                   100€
+                </button>
+                <button type="button" className="bg-white/20 hover:bg-white/30 border-2 border-white py-3 rounded-md transition">
+                  200€
                 </button>
               </div>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
                   className="flex-1 px-4 py-3 rounded-md text-gray-900 text-lg"
-                  placeholder="Ou entrez un montant libre"
-                  min="1"
+                  placeholder="Ou entrez un montant (min. 25€)"
+                  min="25"
                 />
                 <span className="text-lg font-bold">€</span>
               </div>
@@ -240,12 +252,37 @@ export function DonationSympathie() {
               type="submit"
               className="w-full bg-white text-amber-700 py-4 rounded-md hover:bg-amber-50 transition font-medium text-lg"
             >
-              💛 Envoyer mon don de sympathie
+              💛 Envoyer mon don de sympathie (min. 25€)
             </button>
           </form>
 
           <div className="mt-6 text-center text-sm text-amber-100">
             <p>✓ Paiement 100% sécurisé</p>
+          </div>
+        </div>
+
+        {/* Contact Section */}
+        <div className="mt-8 bg-white shadow-lg rounded-lg p-8">
+          <h3 className="text-2xl font-serif text-amber-900 mb-6 text-center">Contact</h3>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="text-center md:text-left">
+              <h4 className="font-semibold text-amber-800 mb-3">Siège</h4>
+              <p className="text-gray-700">
+                B.P. 13241<br />
+                Yaoundé - Cameroun
+              </p>
+            </div>
+            <div className="text-center md:text-left">
+              <h4 className="font-semibold text-amber-800 mb-3">France</h4>
+              <p className="text-gray-700">
+                Richard Mbouma Kohomm<br />
+                11 av. Joseph Rollo<br />
+                78320 La Verrière – France<br />
+                <a href="mailto:mkohomm@gmail.com" className="text-amber-600 hover:text-amber-700">
+                  mkohomm@gmail.com
+                </a>
+              </p>
+            </div>
           </div>
         </div>
 

@@ -12,6 +12,18 @@ export function DonationSoutien() {
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-amber-900 mb-8 text-center">
           Soutien au Développement de l'Ordre
         </h1>
+        {/* New section: Donation info */}
+<div className="bg-gradient-to-br from-amber-100 to-orange-50 shadow-xl rounded-lg p-8 mb-8 border-2 border-amber-300 text-center">
+  <h2 className="text-2xl font-serif text-amber-900 mb-4">Votre Générosité en Action</h2>
+  <p className="text-gray-800 leading-relaxed text-lg mb-4">
+    Le minimum ou plus de votre donation est une générosité qui nous permet de planifier nos actions 
+    d'aide et de solidarité envers des personnes qui en ont besoin.
+  </p>
+  <div className="inline-block bg-white rounded-lg px-8 py-4 shadow-md border-2 border-amber-400">
+    <p className="text-sm text-gray-600 mb-2">Don de Soutien minimum</p>
+    <p className="text-4xl font-bold text-amber-900">50€</p>
+  </div>
+</div>
 
         <div className="bg-white shadow-lg rounded-lg p-8 mb-8">
           <h2 className="text-2xl font-serif text-amber-800 mb-4">Contribuer à notre Mission</h2>
