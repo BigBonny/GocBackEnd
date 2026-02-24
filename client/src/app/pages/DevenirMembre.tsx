@@ -3,6 +3,7 @@ import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { useUserRole } from "@/hooks/useUserRole";
 import { useRegionalPricing } from "@/hooks/useRegionalPricing";
+import { useTranslation } from 'react-i18next';
 import { ROLE_PRICES } from "@/types/index";
 import type { UserRole, CheckoutRequest, CheckoutResponse, PurchaseType, FormationType } from "@/types/index";
 import {
@@ -32,6 +33,7 @@ const roleRoutes: Record<UserRole, string> = {
 };
 
 export function DevenirMembre() {
+  const { t } = useTranslation();
   const { user, isSignedIn } = useUser();
   const { userRole, isExpired } = useUserRole();
   const { pricing, loading: pricingLoading } = useRegionalPricing();
@@ -85,44 +87,30 @@ export function DevenirMembre() {
       const data: CheckoutResponse = await response.json();
       window.location.href = data.url;
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Une erreur est survenue");
+      setError(err instanceof Error ? err.message : t('membership.error'));
       console.error("Payment error:", err);
     } finally {
       setLoading(null);
     }
   };
 
-  // Determine purchase type for user
-  const shouldShowRenewal = userRole && pricing?.adhesionPaid;
-  const shouldShowInitial = !userRole || (userRole && isExpired);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-50">
       <div className="container max-w-6xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-6 text-amber-900">
-            Rejoignez Notre Ordre
+            {t('membership.title')}
           </h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Choisissez le niveau d&apos;engagement qui correspond à votre
-            parcours spirituel et philosophique
+            {t('membership.subtitle')}
           </p>
 
           {userRole && (
-            <Badge
-              variant={isExpired ? "destructive" : "default"}
-              className="mt-6 bg-amber-600"
-            >
-              Actuel : {ROLE_PRICES[userRole].name}{" "}
-              {isExpired && "(Expiré)"}
+            <Badge variant={isExpired ? "destructive" : "default"} className="mt-6 bg-amber-600">
+              {t('membership.current')}: {ROLE_PRICES[userRole].name}{" "}
+              {isExpired && `(${t('membership.expired')})`}
             </Badge>
           )}
-{/* 
-          {pricing && (
-            <div className="mt-4 text-sm text-gray-600">
-              Tarifs: {pricing.regionName}
-            </div>
-          )} */}
         </div>
 
         {error && (
@@ -131,11 +119,10 @@ export function DevenirMembre() {
           </Alert>
         )}
 
-        {/* Membership Tabs */}
         <Tabs defaultValue="membership" className="mb-16">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
-            <TabsTrigger value="membership">Adhésion</TabsTrigger>
-            <TabsTrigger value="formation">Formation</TabsTrigger>
+            <TabsTrigger value="membership">{t('membership.adhesion')}</TabsTrigger>
+            <TabsTrigger value="formation">{t('membership.formation')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="membership" className="mt-8">
@@ -162,7 +149,7 @@ export function DevenirMembre() {
                       >
                         {isPremium && (
                           <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                            <Badge className="bg-amber-600 text-white">Le Plus Populaire</Badge>
+                            <Badge className="bg-amber-600 text-white">{t('membership.mostPopular')}</Badge>
                           </div>
                         )}
 
@@ -172,9 +159,7 @@ export function DevenirMembre() {
                           </div>
 
                           {isCurrentRole && (
-                            <Badge variant="secondary" className="mb-2">
-                              Actif
-                            </Badge>
+                            <Badge variant="secondary" className="mb-2">{t('membership.active')}</Badge>
                           )}
 
                           <CardTitle className="text-2xl text-amber-900">{config.name}</CardTitle>
@@ -187,20 +172,20 @@ export function DevenirMembre() {
                           {pricing && (
                             <div className="bg-amber-50 rounded-lg p-4 space-y-3">
                               <div className="flex justify-between items-center text-sm">
-                                <span className="text-gray-700">Adhésion (une fois)</span>
-                                <span className="font-semibold text-amber-900">
-                                  €{pricing.prices.adhesion}
+                                <span className="text-gray-700">{t('membership.adhesion')} ({t('membership.oneTime')})</span>
+                                <span className="font-semibold text-gray-900">
+                                  {pricing.adhesionPaid ? t('membership.renewal') : t('membership.firstYear')}
                                 </span>
                               </div>
                               <div className="flex justify-between items-center text-sm">
-                                <span className="text-gray-700">Cotisation (par an)</span>
+                                <span className="text-gray-700">{t('membership.cotisation')} ({t('membership.perYear')})</span>
                                 <span className="font-semibold text-amber-900">
                                   €{pricing.prices.cotisation}
                                 </span>
                               </div>
                               <div className="border-t border-amber-200 pt-2 flex justify-between items-center">
                                 <span className="font-semibold text-gray-900">
-                                  {pricing.adhesionPaid ? "Renouvellement" : "Première année"}
+                                  {pricing?.adhesionPaid ? t('membership.renew') : t('membership.becomeMember')}
                                 </span>
                                 <span className="text-2xl font-bold text-amber-900">
                                   €{pricing.adhesionPaid ? pricing.prices.renewal : pricing.prices.initial}
@@ -238,22 +223,22 @@ export function DevenirMembre() {
                               {loading === `${roleKey}-${pricing?.adhesionPaid ? "renewal" : "initial"}` ? (
                                 <>
                                   <span className="animate-spin mr-2">⏳</span>
-                                  Traitement...
+                                  {t('membership.processing')}
                                 </>
                               ) : isSignedIn ? (
                                 <>
-                                  {pricing?.adhesionPaid ? "Renouveler" : "Devenir Membre"}
+                                  {pricing?.adhesionPaid ? t('membership.renew') : t('membership.becomeMember')}
                                   <ArrowRight className="ml-2 h-4 w-4" />
                                 </>
                               ) : (
-                                "S'inscrire et Acheter"
+                                t('membership.signupAndBuy')
                               )}
                             </Button>
                           )}
 
                           {isCurrentRole && (
                             <Badge className="w-full py-2 justify-center bg-green-600">
-                              Abonnement Actif
+                              {t('membership.activeSubscription')}
                             </Badge>
                           )}
 
@@ -262,7 +247,7 @@ export function DevenirMembre() {
                             className="w-full border-amber-600 text-amber-600 hover:bg-amber-50"
                             onClick={() => handleLearnMore(roleKey)}
                           >
-                            En Savoir Plus
+                            {t('membership.learnMore')}
                           </Button>
                         </CardFooter>
                       </Card>
@@ -278,7 +263,7 @@ export function DevenirMembre() {
               <Alert className="border-amber-200 bg-amber-50">
                 <Info className="h-4 w-4 text-amber-600" />
                 <AlertDescription className="text-amber-900">
-                  Les formations sont accessibles après avoir souscrit à une adhésion
+                  {t('membership.formationAccessible')}
                 </AlertDescription>
               </Alert>
 
@@ -287,37 +272,35 @@ export function DevenirMembre() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3">
                     <Sparkles className="h-8 w-8 text-amber-600" />
-                    Formation Membre Apprenti.e
+                    {t('roles.apprenti.formationTitle')}
                   </CardTitle>
                   <CardDescription>
-                    Formation complète par trimestre
+                    {t('roles.apprenti.formationDesc')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="bg-amber-50 rounded-lg p-4">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="font-semibold">Prix par trimestre</span>
+                      <span className="font-semibold">{t('membership.pricePerTrimester')}</span>
                       <span className="text-2xl font-bold text-amber-900">
                         €{pricing?.formation.apprenti_trimestre || 100}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-600">Durée totale: 8 trimestres (2 ans)</p>
-                    <p className="text-sm text-gray-600">
-                      Coût total: €{(pricing?.formation.apprenti_trimestre || 100) * 8}
-                    </p>
+                    <p className="text-sm text-gray-600">{t('roles.apprenti.totalDuration')}</p>
+                    <p className="text-sm text-gray-600">{t('roles.apprenti.totalCost')}: €{(pricing?.formation.apprenti_trimestre || 100) * 8}</p>
                   </div>
                   <ul className="space-y-2">
                     <li className="flex items-start">
                       <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Enseignements approfondis chaque trimestre</span>
+                      <span className="text-sm">{t('roles.apprenti.feature1')}</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Suivi personnalisé de votre progression</span>
+                      <span className="text-sm">{t('roles.apprenti.feature2')}</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Accès aux ressources exclusives</span>
+                      <span className="text-sm">{t('roles.apprenti.feature3')}</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -330,13 +313,10 @@ export function DevenirMembre() {
                     {loading === "apprenti-formation" ? (
                       <>
                         <span className="animate-spin mr-2">⏳</span>
-                        Traitement...
+                        {t('membership.processing')}
                       </>
-                    ) : !userRole ? (
-                      "Adhésion requise"
-                    ) : (
-                      "Acheter 1 Trimestre"
-                    )}
+                    ) : !userRole ? t('membership.adhesionRequired') : 
+                      t('membership.buyTrimester')}
                   </Button>
                 </CardFooter>
               </Card>
@@ -346,35 +326,35 @@ export function DevenirMembre() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3">
                     <Star className="h-8 w-8 text-amber-600" />
-                    Formation Apprenant Auditeur.trice
+                    {t('roles.auditeur.formationTitle')}
                   </CardTitle>
-                  <CardDescription>Cours individuels à l&apos;unité</CardDescription>
+                  <CardDescription>{t('roles.auditeur.formationDesc')}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="bg-amber-50 rounded-lg p-4">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="font-semibold">Prix par cours</span>
+                      <span className="font-semibold">{t('membership.pricePerCourse')}</span>
                       <span className="text-2xl font-bold text-amber-900">
                         €{pricing?.formation.auditeur_cours || 20}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-600">Total de 40 cours disponibles</p>
+                    <p className="text-sm text-gray-600">{t('roles.auditeur.totalCourses')}</p>
                     <p className="text-sm text-gray-600">
-                      Coût total complet: €{(pricing?.formation.auditeur_cours || 20) * 40}
+                      {t('roles.auditeur.totalCost')}: €{(pricing?.formation.auditeur_cours || 20) * 40}
                     </p>
                   </div>
                   <ul className="space-y-2">
                     <li className="flex items-start">
                       <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Flexibilité d&apos;achat à votre rythme</span>
+                      <span className="text-sm">{t('roles.auditeur.feature1')}</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Accès immédiat au cours acheté</span>
+                      <span className="text-sm">{t('roles.auditeur.feature2')}</span>
                     </li>
                     <li className="flex items-start">
                       <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Contenu riche et détaillé</span>
+                      <span className="text-sm">{t('roles.auditeur.feature3')}</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -387,12 +367,12 @@ export function DevenirMembre() {
                     {loading === "auditeur-formation" ? (
                       <>
                         <span className="animate-spin mr-2">⏳</span>
-                        Traitement...
+                        {t('membership.processing')}
                       </>
                     ) : !userRole ? (
-                      "Adhésion requise"
+                      t('membership.adhesionRequired')
                     ) : (
-                      "Acheter 1 Cours"
+                      t('membership.buyCourse')
                     )}
                   </Button>
                 </CardFooter>
@@ -405,29 +385,28 @@ export function DevenirMembre() {
         <div className="max-w-4xl mx-auto mt-16">
           <Card className="border-amber-200">
             <CardHeader>
-              <CardTitle className="text-2xl text-amber-900">Pourquoi Devenir Membre ?</CardTitle>
+              <CardTitle className="text-2xl text-amber-900">{t('membership.whyJoin')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 text-gray-700">
               <p>
-                En rejoignant notre ordre, vous accédez à une communauté dédiée à l&apos;éveil
-                spirituel, à la connaissance ésotérique et à l&apos;entraide fraternelle.
+                {t('membership.whyJoinDesc')}
               </p>
               <ul className="space-y-2 ml-6">
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                  <span>Accès à des enseignements exclusifs</span>
+                  <span>{t('membership.benefit1')}</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                  <span>Participation à des événements et séminaires</span>
+                  <span>{t('membership.benefit2')}</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                  <span>Réseau de fraternité et d&apos;entraide</span>
+                  <span>{t('membership.benefit3')}</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="h-5 w-5 text-amber-600 mr-2 flex-shrink-0 mt-0.5" />
-                  <span>Bibliothèque de ressources spirituelles</span>
+                  <span>{t('membership.benefit4')}</span>
                 </li>
               </ul>
             </CardContent>

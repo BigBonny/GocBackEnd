@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "formation": "Training",
+    "library": "Library",
+    "goc": "GOC",
+    "donation": "Donation",
+    "members": "Members Area",
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout"
+  },
+  "home": {
+    "title": "Grand Order of the Circle",
+    "motto": "Where the tree of knowledge stands, there lies happiness",
+    "welcome": "Welcome to the Grand Order of the Circle",
+    "description": "A community dedicated to spiritual awakening and esoteric knowledge"
+  },
+  "membership": {
+    "title": "Join Our Order",
+    "subtitle": "Choose the level of commitment that matches your spiritual and philosophical journey",
+    "adhesion": "Membership",
+    "formation": "Training",
+    "oneTime": "one time",
+    "perYear": "per year",
+    "firstYear": "First year",
+    "renewal": "Renewal",
+    "becomeMember": "Become a Member",
+    "renew": "Renew",
+    "currentSubscription": "Current Subscription",
+    "learnMore": "Learn More",
+    "mostPopular": "Most Popular",
+    "active": "Active",
+    "expired": "Expired",
+    "current": "Current",
+    "adhesionRequired": "Membership required",
+    "buyTrimester": "Buy 1 Quarter",
+    "buyCourse": "Buy 1 Course",
+    "processing": "Processing...",
+    "signupAndBuy": "Sign Up and Buy"
+  },
+  "roles": {
+    "auditeur": {
+      "name": "Learner Auditor",
+      "description": "Basic access to teachings",
+      "feature1": "Access to individual courses (€20/course)",
+      "feature2": "Total: 40 courses available",
+      "feature3": "Community forum access",
+      "feature4": "Email support"
+    },
+    "apprenti": {
+      "name": "Apprentice Member",
+      "description": "Complete training",
+      "feature1": "Quarterly training (€100/quarter)",
+      "feature2": "Total duration: 8 quarters (2 years)",
+      "feature3": "Advanced content access",
+      "feature4": "Priority support",
+      "feature5": "Monthly webinars"
+    },
+    "frere-soeur": {
+      "name": "Brother/Sister Member",
+      "description": "Full premium access",
+      "feature1": "All content and training",
+      "feature2": "Individual mentoring",
+      "feature3": "24/7 priority support",
+      "feature4": "Exclusive events",
+      "feature5": "International network"
+    }
+  },
+  "donation": {
+    "sympathie": {
+      "title": "Sympathy Donation",
+      "minimum": "€25",
+      "description": "A free and spontaneous gesture"
+    },
+    "soutien": {
+      "title": "Support Donation",
+      "minimum": "€50",
+      "description": "Support for the Order's development"
+    },
+    "charite": {
+      "title": "Charity Donation",
+      "minimum": "€100",
+      "description": "An act of great generosity"
+    },
+    "message": "The minimum or more of your donation is generosity that allows us to plan our aid and solidarity actions for people in need."
+  },
+  "contact": {
+    "title": "Contact",
+    "headquarters": "Headquarters",
+    "france": "France"
+  },
+  "common": {
+    "securePayment": "100% secure payment",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  }
+}

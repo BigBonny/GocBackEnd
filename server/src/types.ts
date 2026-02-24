@@ -15,3 +15,26 @@ export interface StripeMetadata {
   purchaseType: PurchaseType;
   formationType?: FormationType;
 }
+
+export interface DonationRequest {
+  donationType: 'sympathie' | 'soutien' | 'charite';
+  amount: number;
+  userId?: string;
+  email: string;
+  name?: string;
+  message?: string;
+  isRecurring?: boolean;
+  frequency?: 'monthly' | 'quarterly' | 'annual';
+  anonymous?: boolean;
+  allowMention?: boolean;
+}
+
+export interface DonationMetadata {
+  donationType: string;
+  userId?: string;
+  email: string;
+  name?: string;
+  message?: string;
+  anonymous?: string;
+  allowMention?: string;
+}

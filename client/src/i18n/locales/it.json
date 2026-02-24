@@ -1,0 +1,122 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "Chi siamo",
+    "formation": "Formazione",
+    "library": "Biblioteca",
+    "goc": "GOC",
+    "donation": "Donazione",
+    "members": "Area Membri",
+    "login": "Accedi",
+    "signup": "Registrati",
+    "logout": "Esci"
+  },
+  "home": {
+    "title": "Grande Ordine del Cerchio",
+    "motto": "Dove si trova l'albero della conoscenza, c'è la felicità",
+    "welcome": "Benvenuto al Grande Ordine del Cerchio",
+    "description": "Una comunità dedicata al risveglio spirituale e alla conoscenza esoterica"
+  },
+  "membership": {
+    "title": "Unisciti al Nostro Ordine",
+    "subtitle": "Scegli il livello di impegno che corrisponde al tuo percorso spirituale e filosofico",
+    "adhesion": "Adesione",
+    "formation": "Formazione",
+    "oneTime": "una volta",
+    "perYear": "all'anno",
+    "firstYear": "Primo anno",
+    "renewal": "Rinnovo",
+    "becomeMember": "Diventa Membro",
+    "renew": "Rinnova",
+    "currentSubscription": "Abbonamento Attuale",
+    "learnMore": "Scopri di Più",
+    "mostPopular": "Più Popolare",
+    "active": "Attivo",
+    "expired": "Scaduto",
+    "current": "Attuale",
+    "adhesionRequired": "Adesione richiesta",
+    "buyTrimester": "Acquista 1 Trimestre",
+    "buyCourse": "Acquista 1 Corso",
+    "processing": "Elaborazione...",
+    "signupAndBuy": "Registrati e Acquista",
+    "generosity": "La Tua Generosità in Azione",
+    "generosityMessage": "Il minimo o più della tua donazione è generosità che ci permette di pianificare le nostre azioni di aiuto e solidarietà per le persone bisognose.",
+    "formationAccessible": "La formazione è accessibile dopo l'iscrizione all'adesione",
+    "whyBecomeMember": "Perché Diventare Membro?",
+    "whyDescription": "Unendoti al nostro ordine, ottieni accesso a una comunità dedicata al risveglio spirituale, alla conoscenza esoterica e all'aiuto reciproco fraterno.",
+    "benefit1": "Accesso a insegnamenti esclusivi",
+    "benefit2": "Partecipazione a eventi e seminari",
+    "benefit3": "Rete di fratellanza e aiuto reciproco",
+    "benefit4": "Biblioteca di risorse spirituali",
+    "tariffs": "Tariffe",
+    "activeSubscription": "Abbonamento Attivo"
+  },
+  "roles": {
+    "auditeur": {
+      "name": "Apprendista Ascoltatore",
+      "description": "Accesso base agli insegnamenti",
+      "feature1": "Accesso a corsi individuali (20€/corso)",
+      "feature2": "Totale: 40 corsi disponibili",
+      "feature3": "Accesso al forum della comunità",
+      "feature4": "Supporto via email"
+    },
+    "apprenti": {
+      "name": "Membro Apprendista",
+      "description": "Formazione completa",
+      "feature1": "Formazione trimestrale (100€/trimestre)",
+      "feature2": "Durata totale: 8 trimestri (2 anni)",
+      "feature3": "Accesso a contenuti avanzati",
+      "feature4": "Supporto prioritario",
+      "feature5": "Webinar mensili",
+      "formationTitle": "Formazione Membro Apprendista",
+      "formationDesc": "Formazione trimestrale completa",
+      "pricePerTrimester": "Prezzo per trimestre",
+      "totalDuration": "Durata totale: 8 trimestri (2 anni)",
+      "totalCost": "Costo totale"
+    },
+    "frere-soeur": {
+      "name": "Membro Fratello/Sorella",
+      "description": "Accesso premium completo",
+      "feature1": "Tutti i contenuti e la formazione",
+      "feature2": "Mentoring individuale",
+      "feature3": "Supporto prioritario 24/7",
+      "feature4": "Eventi esclusivi",
+      "feature5": "Rete internazionale"
+    }
+  },
+  "donation": {
+    "sympathie": {
+      "title": "Donazione di Simpatia",
+      "minimum": "25€",
+      "description": "Un gesto libero e spontaneo"
+    },
+    "soutien": {
+      "title": "Donazione di Supporto",
+      "minimum": "50€",
+      "description": "Supporto allo sviluppo dell'Ordine"
+    },
+    "charite": {
+      "title": "Donazione di Carità",
+      "minimum": "100€",
+      "description": "Un atto di grande generosità"
+    },
+    "message": "Il minimo o più della tua donazione è generosità che ci permette di pianificare le nostre azioni di aiuto e solidarietà per le persone bisognose."
+  },
+  "contact": {
+    "title": "Contatto",
+    "headquarters": "Sede",
+    "france": "Francia"
+  },
+  "common": {
+    "securePayment": "Pagamento 100% sicuro",
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "save": "Salva",
+    "close": "Chiudi",
+    "loading": "Caricamento...",
+    "error": "Errore",
+    "success": "Successo",
+    "or": "o",
+    "min": "min"
+  }
+}

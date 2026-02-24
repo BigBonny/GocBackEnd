@@ -88,3 +88,18 @@ export function calculateInitialCost(region: PricingRegion): number {
 export function calculateRenewalCost(region: PricingRegion): number {
   return MEMBERSHIP_PRICES[region].cotisation;
 }
+
+export type DonationType = 'sympathie' | 'soutien' | 'charite';
+export type DonationFrequency = 'monthly' | 'quarterly' | 'annual';
+
+export const DONATION_AMOUNTS: Record<DonationType, number> = {
+  sympathie: 2500,  // 25€
+  soutien: 5000,    // 50€
+  charite: 10000,   // 100€
+};
+
+export const DONATION_NAMES: Record<DonationType, string> = {
+  sympathie: 'Don de Sympathie',
+  soutien: 'Don de Soutien',
+  charite: 'Don de Charité',
+};

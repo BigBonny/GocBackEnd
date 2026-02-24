@@ -1,0 +1,122 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "about": "概要",
+    "formation": "トレーニング",
+    "library": "図書館",
+    "goc": "GOC",
+    "donation": "寄付",
+    "members": "メンバーエリア",
+    "login": "ログイン",
+    "signup": "サインアップ",
+    "logout": "ログアウト"
+  },
+  "home": {
+    "title": "円環の大教団",
+    "motto": "知識の木がある場所に幸福がある",
+    "welcome": "円環の大教団へようこそ",
+    "description": "スピリチュアルな目覚めと秘教的知識に捧げられたコミュニティ"
+  },
+  "membership": {
+    "title": "私たちの教団に参加",
+    "subtitle": "あなたのスピリチュアルで哲学的な旅に合ったコミットメントレベルを選択してください",
+    "adhesion": "会員資格",
+    "formation": "トレーニング",
+    "oneTime": "一回",
+    "perYear": "年間",
+    "firstYear": "初年度",
+    "renewal": "更新",
+    "becomeMember": "メンバーになる",
+    "renew": "更新",
+    "currentSubscription": "現在のサブスクリプション",
+    "learnMore": "詳細を見る",
+    "mostPopular": "最も人気",
+    "active": "アクティブ",
+    "expired": "期限切れ",
+    "current": "現在",
+    "adhesionRequired": "会員資格が必要",
+    "buyTrimester": "1四半期購入",
+    "buyCourse": "1コース購入",
+    "processing": "処理中...",
+    "signupAndBuy": "サインアップして購入",
+    "generosity": "あなたの寛大さが行動に",
+    "generosityMessage": "あなたの寄付の最低額以上は、困っている人々への援助と連帯行動を計画することを可能にする寛大さです。",
+    "formationAccessible": "会員資格に登録後、トレーニングにアクセスできます",
+    "whyBecomeMember": "なぜメンバーになるのか？",
+    "whyDescription": "私たちの教団に参加することで、スピリチュアルな目覚め、秘教的知識、兄弟愛的相互援助に捧げられたコミュニティにアクセスできます。",
+    "benefit1": "独占的な教えへのアクセス",
+    "benefit2": "イベントやセミナーへの参加",
+    "benefit3": "兄弟愛と相互援助のネットワーク",
+    "benefit4": "スピリチュアルリソースのライブラリ",
+    "tariffs": "料金",
+    "activeSubscription": "アクティブなサブスクリプション"
+  },
+  "roles": {
+    "auditeur": {
+      "name": "学習者聴講者",
+      "description": "教えへの基本的なアクセス",
+      "feature1": "個別コースへのアクセス（20ユーロ/コース）",
+      "feature2": "合計：40コース利用可能",
+      "feature3": "コミュニティフォーラムへのアクセス",
+      "feature4": "メールサポート"
+    },
+    "apprenti": {
+      "name": "見習いメンバー",
+      "description": "完全なトレーニング",
+      "feature1": "四半期トレーニング（100ユーロ/四半期）",
+      "feature2": "合計期間：8四半期（2年）",
+      "feature3": "高度なコンテンツへのアクセス",
+      "feature4": "優先サポート",
+      "feature5": "月例ウェビナー",
+      "formationTitle": "見習いメンバートレーニング",
+      "formationDesc": "完全な四半期トレーニング",
+      "pricePerTrimester": "四半期ごとの価格",
+      "totalDuration": "合計期間：8四半期（2年）",
+      "totalCost": "合計費用"
+    },
+    "frere-soeur": {
+      "name": "兄弟/姉妹メンバー",
+      "description": "完全なプレミアムアクセス",
+      "feature1": "すべてのコンテンツとトレーニング",
+      "feature2": "個別メンタリング",
+      "feature3": "24時間365日の優先サポート",
+      "feature4": "限定イベント",
+      "feature5": "国際ネットワーク"
+    }
+  },
+  "donation": {
+    "sympathie": {
+      "title": "共感の寄付",
+      "minimum": "25ユーロ",
+      "description": "自由で自発的な行為"
+    },
+    "soutien": {
+      "title": "サポート寄付",
+      "minimum": "50ユーロ",
+      "description": "教団の発展へのサポート"
+    },
+    "charite": {
+      "title": "慈善寄付",
+      "minimum": "100ユーロ",
+      "description": "大きな寛大さの行為"
+    },
+    "message": "あなたの寄付の最低額以上は、困っている人々への援助と連帯行動を計画することを可能にする寛大さです。"
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "headquarters": "本部",
+    "france": "フランス"
+  },
+  "common": {
+    "securePayment": "100%安全な支払い",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "save": "保存",
+    "close": "閉じる",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "or": "または",
+    "min": "分"
+  }
+}

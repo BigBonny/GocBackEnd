@@ -1,6 +1,7 @@
 import { useUser } from '@clerk/clerk-react';
 import { useUserRole } from '@/hooks/useUserRole';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/app/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { Badge } from '@/app/components/ui/badge';
@@ -15,6 +16,7 @@ const roleIcons = {
 };
 
 export function EspaceMembre() {
+  const { t } = useTranslation();
   const { user } = useUser();
   const { userRole, loading, hasAccess } = useUserRole();
   const navigate = useNavigate();
@@ -34,10 +36,10 @@ export function EspaceMembre() {
           <Card className="border-amber-200">
             <CardHeader>
               <CardTitle className="text-2xl text-amber-900">
-                Aucun Abonnement Actif
+                {t('memberSpace.noSubscription.title')}
               </CardTitle>
               <CardDescription>
-                Vous devez souscrire à un abonnement pour accéder à l'espace membre
+                {t('memberSpace.noSubscription.description')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -45,7 +47,7 @@ export function EspaceMembre() {
                 onClick={() => navigate('/devenir-membre')}
                 className="bg-amber-600 hover:bg-amber-700"
               >
-                Choisir un Abonnement
+                {t('memberSpace.noSubscription.button')}
               </Button>
             </CardContent>
           </Card>
@@ -58,38 +60,38 @@ export function EspaceMembre() {
   const currentRoleLevel = ROLE_HIERARCHY[userRole];
 
   const contentSections: Array<{
-    title: string;
-    description: string;
+    titleKey: string;
+    descriptionKey: string;
     requiredRole: UserRole;
     route: string;
   }> = [
     {
-      title: 'Formation Ésotérique',
-      description: 'Accédez aux enseignements de base',
+      titleKey: 'memberSpace.contentSections.esotericTraining.title',
+      descriptionKey: 'memberSpace.contentSections.esotericTraining.description',
       requiredRole: 'auditeur',
       route: '/formation/esoterisme'
     },
     {
-      title: 'Formation Philosophique',
-      description: 'Approfondissez votre connaissance',
+      titleKey: 'memberSpace.contentSections.philosophicalTraining.title',
+      descriptionKey: 'memberSpace.contentSections.philosophicalTraining.description',
       requiredRole: 'apprenti',
       route: '/formation/philosophie'
     },
     {
-      title: 'Développement des Pouvoirs',
-      description: 'Contenu premium exclusif',
+      titleKey: 'memberSpace.contentSections.powerDevelopment.title',
+      descriptionKey: 'memberSpace.contentSections.powerDevelopment.description',
       requiredRole: 'frere-soeur',
       route: '/formation/pouvoirs'
     },
     {
-      title: 'Bibliothèque',
-      description: 'Accès aux ressources documentaires',
+      titleKey: 'memberSpace.contentSections.library.title',
+      descriptionKey: 'memberSpace.contentSections.library.description',
       requiredRole: 'auditeur',
       route: '/bibliotheque'
     },
     {
-      title: 'Vidéos',
-      description: 'Contenus vidéo exclusifs',
+      titleKey: 'memberSpace.contentSections.videos.title',
+      descriptionKey: 'memberSpace.contentSections.videos.description',
       requiredRole: 'apprenti',
       route: '/videos'
     },
@@ -101,7 +103,7 @@ export function EspaceMembre() {
         {/* Header */}
         <div className="mb-12">
           <h1 className="text-4xl font-bold mb-4 text-amber-900">
-            Bienvenue, {user?.firstName || 'Membre'}
+            {t('memberSpace.welcome')}, {user?.firstName || t('memberSpace.member')}
           </h1>
           
           <Card className="border-amber-200">
@@ -111,14 +113,14 @@ export function EspaceMembre() {
                   <Icon className="h-12 w-12 text-amber-600" />
                   <div>
                     <h2 className="text-xl font-semibold text-amber-900">
-                      {ROLE_PRICES[userRole].name}
+                      {t(`memberSpace.roles.${userRole}.name`)}
                     </h2>
                     <p className="text-gray-600">
-                      {ROLE_PRICES[userRole].description}
+                      {t(`memberSpace.roles.${userRole}.description`)}
                     </p>
                   </div>
                 </div>
-                <Badge className="bg-amber-600">Actif</Badge>
+                <Badge className="bg-amber-600">{t('memberSpace.active')}</Badge>
               </div>
             </CardContent>
           </Card>
@@ -144,17 +146,17 @@ export function EspaceMembre() {
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <CardTitle className="text-lg text-amber-900">
-                      {section.title}
+                      {t(section.titleKey)}
                     </CardTitle>
                     {isLocked && <Lock className="h-5 w-5 text-gray-400" />}
                   </div>
-                  <CardDescription>{section.description}</CardDescription>
+                  <CardDescription>{t(section.descriptionKey)}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   {!canAccess && (
                     <div className="space-y-2">
                       <p className="text-sm text-gray-600">
-                        Nécessite : {ROLE_PRICES[section.requiredRole].name}
+                        {t('memberSpace.locked.requires')}: {t(`memberSpace.roles.${section.requiredRole}.name`)}
                       </p>
                       <Button
                         size="sm"
@@ -165,7 +167,7 @@ export function EspaceMembre() {
                           navigate('/devenir-membre');
                         }}
                       >
-                        Améliorer l'Abonnement
+                        {t('memberSpace.locked.upgradeButton')}
                       </Button>
                     </div>
                   )}
@@ -174,7 +176,7 @@ export function EspaceMembre() {
                       size="sm"
                       className="bg-amber-600 hover:bg-amber-700"
                     >
-                      Accéder
+                      {t('memberSpace.access')}
                     </Button>
                   )}
                 </CardContent>
@@ -190,17 +192,17 @@ export function EspaceMembre() {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-xl font-semibold text-amber-900 mb-2">
-                    Débloquez Plus de Contenu
+                    {t('memberSpace.upgradeCTA.title')}
                   </h3>
                   <p className="text-gray-600">
-                    Améliorez votre abonnement pour accéder à tout le contenu exclusif
+                    {t('memberSpace.upgradeCTA.description')}
                   </p>
                 </div>
                 <Button
                   onClick={() => navigate('/devenir-membre')}
                   className="bg-amber-600 hover:bg-amber-700"
                 >
-                  Améliorer
+                  {t('memberSpace.upgradeCTA.button')}
                 </Button>
               </div>
             </CardContent>

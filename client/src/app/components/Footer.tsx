@@ -38,7 +38,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/devenir-membre/apprenti" className="text-amber-200 hover:text-white transition">
+                <Link to="/devenir-membre" className="text-amber-200 hover:text-white transition">
                   Devenir Membre
                 </Link>
               </li>
@@ -72,11 +72,6 @@ export function Footer() {
               <li>
                 <Link to="/espace-membre" className="text-amber-200 hover:text-white transition">
                   Espace Membre
-                </Link>
-              </li>
-              <li>
-                <Link to="/commanderies-fraternelles" className="text-amber-200 hover:text-white transition">
-                  Commanderies
                 </Link>
               </li>
             </ul>
@@ -143,17 +138,6 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-amber-300">
             <div>
               © {new Date().getFullYear()} Grand Ordre du Cercle. Tous droits réservés.
-            </div>
-            <div className="flex gap-6">
-              <Link to="/mentions-legales" className="hover:text-white transition">
-                Mentions légales
-              </Link>
-              <Link to="/politique-confidentialite" className="hover:text-white transition">
-                Confidentialité
-              </Link>
-              <Link to="/conditions-utilisation" className="hover:text-white transition">
-                Conditions d'utilisation
-              </Link>
             </div>
           </div>
         </div>

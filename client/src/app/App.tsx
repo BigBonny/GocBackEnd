@@ -16,6 +16,7 @@ import { CommanderiesFraternelles } from "./pages/CommanderiesFraternelles";
 import { ContactsCommanderies } from "./pages/ContactsCommanderies";
 import { Contact } from "./pages/Contact";
 import { Videos } from "./pages/Videos";
+import { DonationSuccess } from './pages/DonationSuccess';
 
 // GOC pages
 import { Organisation } from "./pages/goc/Organisation";
@@ -68,7 +69,7 @@ export default function App() {
               <Success />
             </RequireClerkAuth>
           } />
-
+          <Route path="/donation-success" element={<DonationSuccess />} />
           {/* GOC */}
           <Route path="/goc/organisation" element={<Organisation />} />
           <Route path="/goc/actions" element={<GOCActions />} />

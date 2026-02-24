@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import logo from "@/assets/logoGOC.png";
 import egypt from "@/assets/symboleegyptien1.jpg";
 import goc1 from "@/assets/visuelGoc1.jpg";
@@ -15,19 +16,21 @@ import {
 } from "../components/ui/carousel";
 
 export function Home() {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       {/* Top motto - Hook #1 */}
-      <div className="bg-[#7A3A2E] text-[#F4EFE8] text-center py-4">
-        <p className="text-sm md:text-lg italic font-body tracking-wide">
-          Là où se trouve l'arbre de la connaissance, se trouve le bonheur
+      <div className="bg-[#7A3A2E] text-[#F4EFE8] text-center py-12">
+        <p className="text-md md:text-xl italic font-body tracking-wide">
+          {t('home.motto')}
         </p>
       </div>
 
       {/* Main title */}
       <div className="text-center py-16 px-4">
         <h1 className="text-4xl md:text-6xl font-serif font-bold text-amber-900 mb-2 tracking-tight" style={{ fontFamily: "'Footlight MT', 'Footlight MT Light', 'Times New Roman', serif" }}>
-          GRAND ORDRE DU CERCLE
+          {t('home.title')}
         </h1>
         <div className="w-24 h-1 bg-amber-700 mx-auto mt-6 rounded-full opacity-60" />
       </div>
@@ -37,9 +40,9 @@ export function Home() {
         <div className="text-center mb-16">
           {/* Hook #2 */}
           <h2 className="text-3xl md:text-5xl font-serif text-amber-800 mb-16 leading-tight">
-            Formation ésotérique & philosophique…
+            {t('home.subtitle.line1')}
             <br />
-            <span className="text-amber-700">Fraternité spirituelle.</span>
+            <span className="text-amber-700">{t('home.subtitle.line2')}</span>
           </h2>
 
           {/* Feature box - Hook #3 */}
@@ -47,19 +50,19 @@ export function Home() {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-600 to-transparent opacity-30" />
             
             <h3 className="text-2xl md:text-3xl font-serif text-amber-900 mb-10 text-center">
-              Accédez à la maîtrise totale de votre destin…
+              {t('home.masterDestiny')}
             </h3>
             
             <div className="grid md:grid-cols-2 gap-x-8 gap-y-3 text-left">
               <ul className="space-y-3">
                 {[
-                  "Se connecter aux Forces bénéfiques",
-                  "Découvrir son Être intérieur",
-                  "Nettoyer son psychisme",
-                  "Maîtriser son mental",
-                  "Eveiller ses aptitudes cachées",
-                  "Influer sur son milieu sans agir physiquement",
-                  "Se régénérer physiquement",
+                  t('home.benefits.connectForces'),
+                  t('home.benefits.innerBeing'),
+                  t('home.benefits.cleansePsyche'),
+                  t('home.benefits.masterMind'),
+                  t('home.benefits.awakenPowers'),
+                  t('home.benefits.influence'),
+                  t('home.benefits.regenerate'),
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 group">
                     <span className="text-amber-600 mt-1 text-lg group-hover:scale-110 transition-transform">✦</span>
@@ -69,14 +72,13 @@ export function Home() {
               </ul>
               <ul className="space-y-3">
                 {[
-                  "Augmenter son espérance de vie",
-                  "Se fixer des buts et les atteindre",
-                  "Accéder au bien-être matériel",
-                  "Améliorer la qualité de sa vie",
-                  "Accéder à l'Éveil spirituel",
-                  "Se protéger contre tous les coups du sort quelle qu'en soit l'origine",
-                  "Acquérir une meilleure santé",
-
+                  t('home.benefits.longevity'),
+                  t('home.benefits.achieveGoals'),
+                  t('home.benefits.materialWellbeing'),
+                  t('home.benefits.qualityOfLife'),
+                  t('home.benefits.spiritualAwakening'),
+                  t('home.benefits.protection'),
+                  t('home.benefits.betterHealth'),
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3 group">
                     <span className="text-amber-600 mt-1 text-lg group-hover:scale-110 transition-transform">✦</span>
@@ -88,7 +90,7 @@ export function Home() {
           </div>
         </div>
 
-        {/* Carousel (with labels) */}
+        {/* Carousel (with labels) Link */}
         <div className="mb-20 px-4 md:px-12">
           <Carousel opts={{ loop: true }} className="relative w-full">
             <CarouselPrevious className="left-2 md:-left-12 bg-white/90 hover:bg-amber-50 border-amber-200 text-amber-900" />
@@ -96,10 +98,10 @@ export function Home() {
 
             <CarouselContent className="flex">
               {[
-                { src: egypt, alt: "Séminaire", label: "Séminaire" },
-                { src: goc2, alt: "Prieuré", label: "Prieuré" },
-                { src: goc4, alt: "Groupe Membres", label: "Groupe Membres" },
-                { src: goc1, alt: "Symboles", label: "Symboles" },
+                { src: egypt, alt: t('home.carousel.seminar'), label: t('home.carousel.seminar') },
+                { src: goc2, alt: t('home.carousel.prieure'), label: t('home.carousel.prieure') },
+                { src: goc4, alt: t('home.carousel.group'), label: t('home.carousel.group') },
+                { src: goc1, alt: t('home.carousel.symbols'), label: t('home.carousel.symbols') },
               ].map((slide, idx) => (
                 <CarouselItem key={idx}>
                   <div className="rounded-2xl overflow-hidden shadow-2xl bg-white group">
@@ -125,10 +127,10 @@ export function Home() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 mb-20">
           {[
             { to: "/", icon: logo, label: "GOC", isImage: true },
-            { to: "/formation", emoji: "📚", label: "Notre Formation" },
-            { to: "/fraternite", emoji: "🤝", label: "Notre Fraternité" },
-            { to: "/seminaires", emoji: "🕯️", label: "Nos Séminaires" },
-            { to: "/actions", emoji: "⚡", label: "Nos Actions" },
+            { to: "/formation", emoji: "📚", label: t('home.links.formation') },
+            { to: "/fraternite", emoji: "🤝", label: t('home.links.fraternity') },
+            { to: "/seminaires", emoji: "🕯️", label: t('home.links.seminars') },
+            { to: "/actions", emoji: "⚡", label: t('home.links.actions') },
           ].map((link, idx) => (
             <Link
               key={idx}
@@ -161,35 +163,35 @@ export function Home() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/20 rounded-full -mr-16 -mt-16 blur-2xl" />
               
               <p className="text-xl md:text-2xl font-serif text-amber-900/90 leading-relaxed relative z-10">
-                <span className="text-amber-700 font-semibold">Connaissances secrètes, Savoirs spirituels et initiatiques,</span>
+                <span className="text-amber-700 font-semibold">{t('home.vision.secrets')}</span>
                 <br />
-                <span className="italic text-amber-800">Éveil des pouvoirs, Puissance personnelle, Outils de mieux-être…</span>
+                <span className="italic text-amber-800">{t('home.vision.awakening')}</span>
               </p>
               <div className="mt-6 pt-6 border-t border-amber-200">
                 <p className="text-lg text-amber-900 font-medium mb-2">
-                  Changer sa vie et accéder à la maîtrise totale de sa vie!
+                  {t('home.vision.changeLife')}
                 </p>
                 <p className="text-gray-700 leading-relaxed text-sm">
-                  Par une formation ésotérique qui vous donne accès aux connaissances sécrètes et aux savoirs spirituels et initiatiques, à l'éveil des pouvoirs, de la puissance personnelle et aux outils du bien-être…
+                  {t('home.vision.description')}
                 </p>
               </div>
             </div>
 
             <div className="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-amber-100 relative">
               <div className="absolute -top-3 left-8 bg-amber-700 text-white px-4 py-1 rounded-full text-sm font-serif shadow-lg">
-                Notre Vision
+                {t('home.vision.title')}
               </div>
               
               <h3 className="text-2xl font-serif text-amber-900 mb-6 mt-2">
-                Grand Ordre du Cercle
+                {t('home.vision.goc')}
               </h3>
               
               <div className="prose prose-amber max-w-none">
                 <p className="text-lg italic font-serif text-amber-800/90 leading-relaxed border-l-4 border-amber-300 pl-6 py-2 bg-amber-50/50 rounded-r-lg">
-                  « L'Homme fut originellement conçu comme un Être purement spirituel, émané du Principe divin « à l'image et à la ressemblance du Grand Esprit Créateur ». Lors de sa descente dans la matière, il est mû par une impulsion jumelle: Attirance-Rejet, Désir-Répulsion. Revêtu d'un corps corruptible il est désormais séparé de l'unité du Principe. Sa double nature – matérielle et spirituelle – le soumet à un conflit entre aspirations spirituelles et les chaînes de la matérialité. Depuis lors, il accomplit par orgueil, des actes gouvernés par ces impulsions. Mais l'homme de désir cherche à obtenir sa réintégration dans son état premier et à recouvrer son corps de gloire.
+                  {t('home.vision.quote')}
                 </p>
                 <p className="text-gray-700 leading-relaxed mt-4">
-                  Le but du GOC est d'éclairer l'Initié sur sa nature, son origine et sa destination. Il ou elle reçoit des enseignements essentiellement pratiques et initiatiques, traitant d'ésotérisme, de spiritualité, de métaphysique, des secrets des Yogis, de philosophie et de développement personnel ; lui permettant une véritable purification, l'accès aux états de conscience les plus élevés et l'acquisition des pouvoirs agissants.»
+                  {t('home.vision.mission')}
                 </p>
               </div>
             </div>
@@ -200,42 +202,35 @@ export function Home() {
                 to="/devenir-membre"
                 className="col-span-2 md:col-span-1 bg-gradient-to-br from-amber-700 to-amber-800 text-white rounded-xl shadow-lg p-6 hover:from-amber-800 hover:to-amber-900 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 text-center group flex flex-col justify-center min-h-[100px]"
               >
-                <h4 className="font-serif text-lg group-hover:scale-105 transition-transform">Devenir Membre</h4>
+                <h4 className="font-serif text-lg group-hover:scale-105 transition-transform">{t('home.nav.becomeMember')}</h4>
               </Link>
 
               <Link
-                to="/videos"
+                to="/bibliotheque/videos"
                 className="bg-white border-2 border-amber-200 text-amber-900 rounded-xl shadow-md p-6 hover:border-amber-400 hover:bg-amber-50/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center group flex flex-col justify-center"
               >
-                <h4 className="font-serif text-lg group-hover:text-amber-700 transition-colors">Vidéos</h4>
+                <h4 className="font-serif text-lg group-hover:text-amber-700 transition-colors">{t('home.nav.videos')}</h4>
               </Link>
 
               <Link
-                to="/donation"
+                to="/donation/charite"
                 className="bg-white border-2 border-amber-200 text-amber-900 rounded-xl shadow-md p-6 hover:border-amber-400 hover:bg-amber-50/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center group flex flex-col justify-center"
               >
-                <h4 className="font-serif text-lg group-hover:text-amber-700 transition-colors">Donation</h4>
+                <h4 className="font-serif text-lg group-hover:text-amber-700 transition-colors">{t('home.nav.donation')}</h4>
               </Link>
 
               <Link
                 to="/commanderies-fraternelles"
                 className="bg-white border-2 border-amber-200 text-amber-900 rounded-xl shadow-md p-6 hover:border-amber-400 hover:bg-amber-50/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center group flex flex-col justify-center"
               >
-                <h4 className="font-serif text-lg group-hover:text-amber-700 transition-colors">Commanderies</h4>
-              </Link>
-
-              <Link
-                to="/contacts-commanderies"
-                className="bg-white border-2 border-amber-200 text-amber-900 rounded-xl shadow-md p-6 hover:border-amber-400 hover:bg-amber-50/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center group flex flex-col justify-center"
-              >
-                <h4 className="font-serif text-lg group-hover:text-amber-700 transition-colors">Contacts</h4>
+                <h4 className="font-serif text-lg group-hover:text-amber-700 transition-colors">{t('home.nav.commanderies')}</h4>
               </Link>
 
               <Link
                 to="/contact"
                 className="bg-white border-2 border-amber-200 text-amber-900 rounded-xl shadow-md p-6 hover:border-amber-400 hover:bg-amber-50/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center group flex flex-col justify-center"
               >
-                <h4 className="font-serif text-lg group-hover:text-amber-700 transition-colors">Contact</h4>
+                <h4 className="font-serif text-lg group-hover:text-amber-700 transition-colors">{t('home.nav.contact')}</h4>
               </Link>
             </div>
           </div>
@@ -245,12 +240,12 @@ export function Home() {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
               <ImageWithFallback
                 src={egypt}
-                alt="Grand Ordre du Cercle"
+                alt={t('home.image.alt')}
                 className="w-full h-[600px] object-cover hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-amber-900/40 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 text-white">
-                <p className="font-serif text-xl italic opacity-90">La sagesse ancienne pour l'homme moderne</p>
+                <p className="font-serif text-xl italic opacity-90">{t('home.image.caption')}</p>
               </div>
             </div>
           </div>
@@ -259,21 +254,21 @@ export function Home() {
 
       {/* Footer */}
       <footer className="bg-[#7A3A2E] text-amber-50 py-12 mt-16 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
+        <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg \'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]" />
         <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
           <div className="inline-block p-3 bg-white/10 rounded-full mb-4 backdrop-blur-sm">
             <img src={logo} alt="Logo GOC" className="h-12 w-12" />
           </div>
           <p className="text-sm text-amber-100/80 tracking-wider">
-            © 2026 Grand Ordre du Cercle - Tous droits réservés
+            {t('home.footer.copyright')}
           </p>
           <div className="mt-4 flex justify-center gap-4 text-xs text-amber-200/60">
             <span>•</span>
-            <span>Sapientia</span>
+            <span>{t('home.footer.sapientia')}</span>
             <span>•</span>
-            <span>Fraternitas</span>
+            <span>{t('home.footer.fraternitas')}</span>
             <span>•</span>
-            <span>Spiritus</span>
+            <span>{t('home.footer.spiritus')}</span>
             <span>•</span>
           </div>
         </div>

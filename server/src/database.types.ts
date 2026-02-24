@@ -1,53 +1,45 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
-
 export interface Database {
   public: {
     Tables: {
       users: {
-  Row: {
-    id: string
-    clerk_user_id: string
-    email: string
-    role: 'auditeur' | 'apprenti' | 'frere-soeur' | null
-    role_expires_at: string | null
-    adhesion_paid: boolean
-    last_cotisation_date: string | null
-    formation_credits: number
-    created_at: string
-    updated_at: string
-  }
-  Insert: {
-    id?: string
-    clerk_user_id: string
-    email: string
-    role?: 'auditeur' | 'apprenti' | 'frere-soeur' | null
-    role_expires_at?: string | null
-    adhesion_paid?: boolean
-    last_cotisation_date?: string | null
-    formation_credits?: number
-    created_at?: string
-    updated_at?: string
-  }
-  Update: {
-    id?: string
-    clerk_user_id?: string
-    email?: string
-    role?: 'auditeur' | 'apprenti' | 'frere-soeur' | null
-    role_expires_at?: string | null
-    adhesion_paid?: boolean
-    last_cotisation_date?: string | null
-    formation_credits?: number
-    created_at?: string
-    updated_at?: string
-  }
-  Relationships: []
-}
+        Row: {
+          id: string
+          clerk_user_id: string
+          email: string
+          role: 'auditeur' | 'apprenti' | 'frere-soeur' | null
+          role_expires_at: string | null
+          adhesion_paid: boolean
+          last_cotisation_date: string | null
+          formation_credits: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          clerk_user_id: string
+          email: string
+          role?: 'auditeur' | 'apprenti' | 'frere-soeur' | null
+          role_expires_at?: string | null
+          adhesion_paid?: boolean
+          last_cotisation_date?: string | null
+          formation_credits?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          clerk_user_id?: string
+          email?: string
+          role?: 'auditeur' | 'apprenti' | 'frere-soeur' | null
+          role_expires_at?: string | null
+          adhesion_paid?: boolean
+          last_cotisation_date?: string | null
+          formation_credits?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       payments: {
         Row: {
           id: string
@@ -56,7 +48,7 @@ export interface Database {
           role: 'auditeur' | 'apprenti' | 'frere-soeur'
           amount: number
           currency: string
-          status: string
+          status: 'pending' | 'completed' | 'failed'
           created_at: string
         }
         Insert: {
@@ -65,8 +57,8 @@ export interface Database {
           stripe_payment_id: string
           role: 'auditeur' | 'apprenti' | 'frere-soeur'
           amount: number
-          currency?: string
-          status: string
+          currency: string
+          status: 'pending' | 'completed' | 'failed'
           created_at?: string
         }
         Update: {
@@ -76,73 +68,101 @@ export interface Database {
           role?: 'auditeur' | 'apprenti' | 'frere-soeur'
           amount?: number
           currency?: string
+          status?: 'pending' | 'completed' | 'failed'
+          created_at?: string
+        }
+        Relationships: []
+      }
+      formations: {
+        Row: {
+          id: string
+          user_id: string
+          formation_type: 'apprenti_trimestre' | 'auditeur_cours'
+          amount: number
+          credits_added: number
+          stripe_payment_id: string
+          status: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          formation_type: 'apprenti_trimestre' | 'auditeur_cours'
+          amount: number
+          credits_added: number
+          stripe_payment_id: string
+          status: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          formation_type?: 'apprenti_trimestre' | 'auditeur_cours'
+          amount?: number
+          credits_added?: number
+          stripe_payment_id?: string
           status?: string
           created_at?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "payments_user_id_fkey"
-            columns: ["user_id"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
-      formations: {
-  Row: {
-    id: string
-    user_id: string
-    formation_type: 'apprenti_trimestre' | 'auditeur_cours'
-    amount: number
-    credits_added: number
-    stripe_payment_id: string
-    status: string
-    created_at: string
+      donations: {
+        Row: {
+          id: string
+          user_id: string | null
+          donor_name: string | null
+          donor_email: string
+          donation_type: 'sympathie' | 'soutien' | 'charite'
+          amount: number
+          currency: string
+          is_recurring: boolean
+          frequency: 'monthly' | 'quarterly' | 'annual' | null
+          stripe_payment_id: string | null
+          stripe_subscription_id: string | null
+          status: string
+          message: string | null
+          anonymous: boolean
+          allow_mention: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          donor_name?: string | null
+          donor_email: string
+          donation_type: 'sympathie' | 'soutien' | 'charite'
+          amount: number
+          currency?: string
+          is_recurring?: boolean
+          frequency?: 'monthly' | 'quarterly' | 'annual' | null
+          stripe_payment_id?: string | null
+          stripe_subscription_id?: string | null
+          status?: string
+          message?: string | null
+          anonymous?: boolean
+          allow_mention?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          donor_name?: string | null
+          donor_email?: string
+          donation_type?: 'sympathie' | 'soutien' | 'charite'
+          amount?: number
+          currency?: string
+          is_recurring?: boolean
+          frequency?: 'monthly' | 'quarterly' | 'annual' | null
+          stripe_payment_id?: string | null
+          stripe_subscription_id?: string | null
+          status?: string
+          message?: string | null
+          anonymous?: boolean
+          allow_mention?: boolean
+          created_at?: string
+        }
+        Relationships: []
+      }
+    }
   }
-  Insert: {
-    id?: string
-    user_id: string
-    formation_type: 'apprenti_trimestre' | 'auditeur_cours'
-    amount: number
-    credits_added: number
-    stripe_payment_id: string
-    status: string
-    created_at?: string
-  }
-  Update: {
-    id?: string
-    user_id?: string
-    formation_type?: 'apprenti_trimestre' | 'auditeur_cours'
-    amount?: number
-    credits_added?: number
-    stripe_payment_id?: string
-    status?: string
-    created_at?: string
-  }
-  Relationships: []
 }
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      [_ in never]: never
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
-
-// Type helpers for easier usage
-export type Tables<T extends keyof Database['public']['Tables']> = 
-  Database['public']['Tables'][T]['Row']
-
-export type TablesInsert<T extends keyof Database['public']['Tables']> = 
-  Database['public']['Tables'][T]['Insert']
-
-export type TablesUpdate<T extends keyof Database['public']['Tables']> = 
-  Database['public']['Tables'][T]['Update']

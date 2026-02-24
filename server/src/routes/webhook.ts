@@ -35,50 +35,102 @@ router.post('/webhook', async (req: Request, res: Response): Promise<void> => {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as StripeType.Checkout.Session;
-    const { userId, role, region, purchaseType, formationType } = session.metadata as { 
-      userId: string; 
-      role: UserRole;
-      region: PricingRegion;
-      purchaseType: PurchaseType;
-      formationType?: FormationType;
-    };
-
-    console.log(`Processing payment: user=${userId}, type=${purchaseType}, role=${role}`);
-
-    try {
-      if (purchaseType === 'formation') {
-        // Formation purchase
-        await handleFormationPurchase(userId, formationType as FormationType, session);
-      } else if (purchaseType === 'initial') {
-        // Initial membership
-        await handleInitialMembership(userId, role, session);
-      } else if (purchaseType === 'renewal') {
-        // Annual renewal
-        await handleRenewal(userId, role, session);
+    
+    // Check if this is a donation (has donationType in metadata)
+    if (session.metadata && session.metadata.donationType) {
+      console.log('Processing donation payment:', session.metadata.donationType);
+      
+      try {
+        await handleDonationPayment(session);
+        console.log('Donation recorded successfully');
+      } catch (error) {
+        console.error('Error processing donation:', error);
+        res.status(500).json({ error: 'Failed to process donation' });
+        return;
       }
+    } else if (session.metadata && session.metadata.userId) {
+      // Regular membership payment
+      const metadata = session.metadata;
+      const userId = metadata.userId;
+      const role = metadata.role as UserRole;
+      const purchaseType = metadata.purchaseType as PurchaseType;
+      const formationType = metadata.formationType as FormationType | undefined;
 
-      // Record payment in payments table
-      const paymentData: Database['public']['Tables']['payments']['Insert'] = {
-        user_id: userId,
-        stripe_payment_id: session.payment_intent as string,
-        role,
-        amount: session.amount_total!,
-        currency: session.currency!,
-        status: 'completed',
-      };
+      console.log(`Processing payment: user=${userId}, type=${purchaseType}, role=${role}`);
 
-      await supabase.from('payments').insert(paymentData);
+      try {
+        if (purchaseType === 'formation' && formationType) {
+          // Formation purchase
+          await handleFormationPurchase(userId, formationType, session);
+        } else if (purchaseType === 'initial') {
+          // Initial membership
+          await handleInitialMembership(userId, role, session);
+        } else if (purchaseType === 'renewal') {
+          // Annual renewal
+          await handleRenewal(userId, role, session);
+        }
 
-      console.log(`Successfully processed ${purchaseType} payment for user ${userId}`);
-    } catch (error) {
-      console.error('Database error:', error);
-      res.status(500).json({ error: 'Database error occurred' });
-      return;
+        // Record payment in payments table
+        const paymentData: Database['public']['Tables']['payments']['Insert'] = {
+          user_id: userId,
+          stripe_payment_id: (session.payment_intent as string) || 'unknown',
+          role,
+          amount: session.amount_total || 0,
+          currency: session.currency || 'eur',
+          status: 'completed',
+        };
+
+        await supabase.from('payments').insert(paymentData);
+
+        console.log(`Successfully processed ${purchaseType} payment for user ${userId}`);
+      } catch (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ error: 'Database error occurred' });
+        return;
+      }
     }
   }
 
   res.json({ received: true });
 });
+
+async function handleDonationPayment(session: StripeType.Checkout.Session) {
+  if (!session.metadata) {
+    throw new Error('Missing metadata in donation session');
+  }
+
+  const metadata = session.metadata;
+  const email = metadata.email || session.customer_email || '';
+
+  if (!email) {
+    throw new Error('Missing email for donation');
+  }
+
+  const donationData: Database['public']['Tables']['donations']['Insert'] = {
+    user_id: metadata.userId || null,
+    donor_name: metadata.name || null,
+    donor_email: email,
+    donation_type: metadata.donationType as 'sympathie' | 'soutien' | 'charite',
+    amount: session.amount_total || 0,
+    currency: session.currency || 'eur',
+    is_recurring: session.mode === 'subscription',
+    frequency: session.mode === 'subscription' && metadata.frequency ? 
+      (metadata.frequency as 'monthly' | 'quarterly' | 'annual') : null,
+    stripe_payment_id: (session.payment_intent as string) || null,
+    stripe_subscription_id: (session.subscription as string) || null,
+    status: 'completed',
+    message: metadata.message || null,
+    anonymous: metadata.anonymous === 'true',
+    allow_mention: metadata.allowMention === 'true',
+  };
+
+  const { error } = await supabase.from('donations').insert(donationData);
+
+  if (error) {
+    console.error('Error recording donation:', error);
+    throw error;
+  }
+}
 
 async function handleInitialMembership(
   userId: string, 
@@ -184,9 +236,9 @@ async function handleFormationPurchase(
     .insert({
       user_id: userId,
       formation_type: formationType,
-      amount: session.amount_total!,
+      amount: session.amount_total || 0,
       credits_added: formationInfo.credits,
-      stripe_payment_id: session.payment_intent as string,
+      stripe_payment_id: (session.payment_intent as string) || 'unknown',
       status: 'completed',
     });
 

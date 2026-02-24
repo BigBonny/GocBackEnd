@@ -5,6 +5,7 @@ import checkoutRouter from './routes/checkout.js';
 import webhookRouter from './routes/webhook.js';
 import regionRouter from './routes/region.js'; // ← Add this
 import { errorHandler } from './middleware/errorHandler.js';
+import donationRouter from './routes/donation.js';
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/api', regionRouter); // ← Add this
 app.use(webhookRouter);
 
 app.use(errorHandler);
+app.use('/api', donationRouter);
 
 app.listen(config.port, () => {
   console.log(`🚀 Server running on port ${config.port}`);

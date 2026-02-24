@@ -1,0 +1,122 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于",
+    "formation": "培训",
+    "library": "图书馆",
+    "goc": "GOC",
+    "donation": "捐赠",
+    "members": "会员区",
+    "login": "登录",
+    "signup": "注册",
+    "logout": "退出"
+  },
+  "home": {
+    "title": "圆环大秩序",
+    "motto": "知识之树所在之处，即是幸福所在",
+    "welcome": "欢迎来到圆环大秩序",
+    "description": "致力于灵性觉醒和深奥知识的社区"
+  },
+  "membership": {
+    "title": "加入我们的秩序",
+    "subtitle": "选择与您的灵性和哲学旅程相匹配的承诺级别",
+    "adhesion": "会员资格",
+    "formation": "培训",
+    "oneTime": "一次性",
+    "perYear": "每年",
+    "firstYear": "第一年",
+    "renewal": "续订",
+    "becomeMember": "成为会员",
+    "renew": "续订",
+    "currentSubscription": "当前订阅",
+    "learnMore": "了解更多",
+    "mostPopular": "最受欢迎",
+    "active": "活跃",
+    "expired": "已过期",
+    "current": "当前",
+    "adhesionRequired": "需要会员资格",
+    "buyTrimester": "购买1个季度",
+    "buyCourse": "购买1门课程",
+    "processing": "处理中...",
+    "signupAndBuy": "注册并购买",
+    "generosity": "您的慷慨在行动",
+    "generosityMessage": "您捐赠的最低金额或更多是慷慨之举，使我们能够为有需要的人规划援助和团结行动。",
+    "formationAccessible": "订阅会员资格后可访问培训",
+    "whyBecomeMember": "为什么成为会员？",
+    "whyDescription": "通过加入我们的秩序，您可以访问致力于灵性觉醒、深奥知识和兄弟般互助的社区。",
+    "benefit1": "访问独家教学",
+    "benefit2": "参加活动和研讨会",
+    "benefit3": "兄弟情谊和互助网络",
+    "benefit4": "精神资源图书馆",
+    "tariffs": "价格",
+    "activeSubscription": "活跃订阅"
+  },
+  "roles": {
+    "auditeur": {
+      "name": "学习者听众",
+      "description": "基本教学访问",
+      "feature1": "访问单个课程（20欧元/课程）",
+      "feature2": "总计：40门课程可用",
+      "feature3": "社区论坛访问",
+      "feature4": "电子邮件支持"
+    },
+    "apprenti": {
+      "name": "学徒会员",
+      "description": "完整培训",
+      "feature1": "季度培训（100欧元/季度）",
+      "feature2": "总时长：8个季度（2年）",
+      "feature3": "高级内容访问",
+      "feature4": "优先支持",
+      "feature5": "每月网络研讨会",
+      "formationTitle": "学徒会员培训",
+      "formationDesc": "完整的季度培训",
+      "pricePerTrimester": "每季度价格",
+      "totalDuration": "总时长：8个季度（2年）",
+      "totalCost": "总费用"
+    },
+    "frere-soeur": {
+      "name": "兄弟/姐妹会员",
+      "description": "完全高级访问",
+      "feature1": "所有内容和培训",
+      "feature2": "个人指导",
+      "feature3": "24/7优先支持",
+      "feature4": "独家活动",
+      "feature5": "国际网络"
+    }
+  },
+  "donation": {
+    "sympathie": {
+      "title": "同情捐赠",
+      "minimum": "25欧元",
+      "description": "自由而自发的姿态"
+    },
+    "soutien": {
+      "title": "支持捐赠",
+      "minimum": "50欧元",
+      "description": "支持秩序的发展"
+    },
+    "charite": {
+      "title": "慈善捐赠",
+      "minimum": "100欧元",
+      "description": "伟大慷慨的行为"
+    },
+    "message": "您捐赠的最低金额或更多是慷慨之举，使我们能够为有需要的人规划援助和团结行动。"
+  },
+  "contact": {
+    "title": "联系",
+    "headquarters": "总部",
+    "france": "法国"
+  },
+  "common": {
+    "securePayment": "100%安全支付",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "close": "关闭",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "or": "或",
+    "min": "分钟"
+  }
+}
