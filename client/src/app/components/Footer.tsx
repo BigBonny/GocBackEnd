@@ -42,11 +42,6 @@ export function Footer() {
                   Devenir Membre
                 </Link>
               </li>
-              <li>
-                <Link to="/contact" className="text-amber-200 hover:text-white transition">
-                  Contact
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -121,7 +116,7 @@ export function Footer() {
             <div className="text-sm text-amber-200">
               <div className="flex items-center gap-2 mb-2">
                 <Mail className="w-4 h-4" />
-                <span>contact@goc.org</span>
+                <span>contact@goc-fraternity.org</span>
               </div>
               <p className="text-xs text-amber-300 mt-4">
                 Newsletter mensuelle :<br />
