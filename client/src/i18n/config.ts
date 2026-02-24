@@ -54,7 +54,85 @@ const resources = {
         myAccount: "Mon compte",
         closeMenu: "Fermer le menu",
         openMenu: "Ouvrir le menu"
-      },"memberSpace": {
+      },enseignements: {
+        meta: {
+          title: "Enseignements initiatiques | GOC",
+          description: "Enseignements initiatiques pour changer sa vie - Grand Ordre du Cercle"
+        },
+        hero: {
+          subtitle: "Voie Initiatique",
+          title: "Enseignements initiatiques",
+          titleHighlight: "pour changer sa vie"
+        },
+        introduction: {
+          quote: "Indépendamment de l'âge, du sexe ou de la culture, chacun aspire à réussir sa vie. Pour y parvenir, il faut exploiter la force de vos énergies positives et de vos qualités pour vous imposer et avoir du succès.",
+          paragraph1: "Aussi, le meilleur investissement que vous pouvez faire si vous voulez réussir, est d'exploiter votre éclat intérieur – c'est-à-dire – votre vraie personnalité, vos forces et vos qualités positives.",
+          study: "Une étude américaine récente montre que la réussite d'un individu dépend à {{percentagePersonality}} de sa personnalité ; les {{percentageKnowledge}} restant représentent ses connaissances et son expérience.",
+          conclusion: "Le {{goc}} vous donne les clés pour y parvenir."
+        },
+        mainContent: {
+          title: "Les Enseignements du GOC",
+          subtitle: "Connaissances philosophiques et idéologiques, clés et techniques extrêmement puissants pour l'acquisition des pouvoirs et le développement personnel !"
+        },
+        pillars: {
+          esoterisme: {
+            title: "Ésotérisme",
+            items: [
+              "La notion de Dieu",
+              "Connaissance des religions",
+              "L'immortalité",
+              "Etre soi",
+              "La vie enchantée",
+              "Le magnétisme",
+              "L'humanisme",
+              "Les idéologies",
+              "La vie, l'existence, la mort",
+              "Le Yin et le Yan",
+              "Soi et l'Autre"
+            ]
+          },
+          philosophie: {
+            title: "Philosophie",
+            items: [
+              { title: "Pensées", desc: "africaine, chinoise, indienne, grecque" },
+              { title: "Croyances", desc: "origine du sacré, histoire des religions" },
+              { title: "Mythologies", desc: "héros aux mille visages" },
+              { title: "Sagesse", desc: "les cinq piliers" }
+            ]
+          },
+          pouvoirs: {
+            title: "Pouvoirs",
+            items: [
+              "Se connecter aux Forces bénéfiques",
+              "Découvrir son Être intérieur",
+              "Nettoyer son psychisme",
+              "Maîtriser son mental",
+              "Eveiller ses aptitudes cachées",
+              "Influer sur son milieu sans agir physiquement",
+              "Se régénérer physiquement",
+              "Acquérir une meilleure santé",
+              "Augmenter son espérance de vie",
+              "Se fixer des buts et les atteindre",
+              "Accéder au bien-être matériel",
+              "Améliorer la qualité de sa vie",
+              "Accéder à l'Éveil spirituel",
+              "Se protéger contre tous les coups du sort quelle qu'en soit l'origine"
+            ],
+            more: "Et plus encore..."
+          }
+        },
+        development: {
+          title: "Développement des Pouvoirs",
+          quote: "Tous ceux qui sont en quête d'évolution spirituelle et d'acquisition de pouvoirs recevront un enseignement qui leur permettra d'acquérir une personnalité magnétique et radieuse.",
+          cta: "Commencer votre initiation"
+        },
+        footerQuote: "Une véritable purification, l'accès aux états de conscience les plus élevés et l'acquisition des pouvoirs agissants.",
+        percentages: {
+          personality: "85%",
+          knowledge: "15%"
+        }
+      },
+      "memberSpace": {
     "loading": "Chargement...",
     "noSubscription": {
       "title": "Aucun Abonnement Actif",
@@ -1256,6 +1334,83 @@ goc: {
         myAccount: "My Account",
         closeMenu: "Close Menu",
         openMenu: "Open Menu"
+      },enseignements: {
+        meta: {
+          title: "Initiatic Teachings | GOC",
+          description: "Initiatic teachings to change your life - Grand Order of the Circle"
+        },
+        hero: {
+          subtitle: "Initiatic Path",
+          title: "Initiatic Teachings",
+          titleHighlight: "to change your life"
+        },
+        introduction: {
+          quote: "Regardless of age, gender, or culture, everyone aspires to succeed in life. To achieve this, you must harness the power of your positive energies and qualities to assert yourself and achieve success.",
+          paragraph1: "Therefore, the best investment you can make if you want to succeed is to exploit your inner radiance—that is, your true personality, your strengths, and your positive qualities.",
+          study: "A recent American study shows that an individual's success depends {{percentagePersonality}} on their personality; the remaining {{percentageKnowledge}} represents their knowledge and experience.",
+          conclusion: "{{goc}} gives you the keys to achieve this."
+        },
+        mainContent: {
+          title: "The Teachings of GOC",
+          subtitle: "Philosophical and ideological knowledge, extremely powerful keys and techniques for acquiring powers and personal development!"
+        },
+        pillars: {
+          esoterisme: {
+            title: "Esotericism",
+            items: [
+              "The concept of God",
+              "Knowledge of religions",
+              "Immortality",
+              "Being oneself",
+              "The enchanted life",
+              "Magnetism",
+              "Humanism",
+              "Ideologies",
+              "Life, existence, death",
+              "Yin and Yang",
+              "Self and Other"
+            ]
+          },
+          philosophie: {
+            title: "Philosophy",
+            items: [
+              { title: "Thoughts", desc: "African, Chinese, Indian, Greek" },
+              { title: "Beliefs", desc: "origin of the sacred, history of religions" },
+              { title: "Mythologies", desc: "hero with a thousand faces" },
+              { title: "Wisdom", desc: "the five pillars" }
+            ]
+          },
+          pouvoirs: {
+            title: "Powers",
+            items: [
+              "Connect to beneficial Forces",
+              "Discover your inner Being",
+              "Cleanse your psyche",
+              "Master your mind",
+              "Awaken your hidden abilities",
+              "Influence your environment without physical action",
+              "Regenerate physically",
+              "Acquire better health",
+              "Increase your life expectancy",
+              "Set goals and achieve them",
+              "Access material well-being",
+              "Improve your quality of life",
+              "Access Spiritual Awakening",
+              "Protect yourself against all misfortunes regardless of their origin"
+            ],
+            more: "And more..."
+          }
+        },
+        development: {
+          title: "Development of Powers",
+          quote: "All those seeking spiritual evolution and the acquisition of powers will receive teachings that will enable them to acquire a magnetic and radiant personality.",
+          cta: "Begin your initiation"
+        },
+        footerQuote: "True purification, access to the highest states of consciousness, and the acquisition of acting powers.",
+        percentages: {
+          personality: "85%",
+          knowledge: "15%"
+        }
       },
       "memberSpace": {
     "loading": "Loading...",
@@ -2379,6 +2534,83 @@ goc: {
         myAccount: "حسابي",
         closeMenu: "إغلاق القائمة",
         openMenu: "فتح القائمة"
+      },enseignements: {
+        meta: {
+          title: "التعاليم الباطنية | GOC",
+          description: "التعاليم الباطنية لتغيير حياتك - النظام الكبير للدائرة"
+        },
+        hero: {
+          subtitle: "المسار الباطني",
+          title: "التعاليم الباطنية",
+          titleHighlight: "لتغيير حياتك"
+        },
+        introduction: {
+          quote: "بغض النظر عن العمر أو الجنس أو الثقافة، يطمح الجميع إلى النجاح في الحياة. لتحقيق ذلك، يجب عليك تسخير قوى طاقاتك الإيجابية وصفاتك لتأكيد ذاتك وتحقيق النجاح.",
+          paragraph1: "لذلك، أفضل استثمار يمكنك القيام به إذا كنت تريد النجاح هو استغلال إشعاعك الداخلي - أي شخصيتك الحقيقية، ونقاط قوتك، وصفاتك الإيجابية.",
+          study: "تُظهر دراسة أمريكية حديثة أن نجاح الفرد يعتمد بنسبة {{percentagePersonality}} على شخصيته؛ وتمثل النسبة المتبقية {{percentageKnowledge}} معرفته وخبرته.",
+          conclusion: "يمنحك {{goc}} المفاتيح لتحقيق ذلك."
+        },
+        mainContent: {
+          title: "تعاليم GOC",
+          subtitle: "المعرفة الفلسفية والأيديولوجية، مفاتيح وتقنيات قوية للغاية لاكتساب القوى والتنمية الشخصية!"
+        },
+        pillars: {
+          esoterisme: {
+            title: "الباطنية",
+            items: [
+              "مفهوم الله",
+              "معرفة الأديان",
+              "الخلود",
+              "كونك ذاتك",
+              "الحياة الساحرة",
+              "المغناطيسية",
+              "الإنسانية",
+              "الأيديولوجيات",
+              "الحياة، الوجود، الموت",
+              "الين واليانغ",
+              "الذات والآخر"
+            ]
+          },
+          philosophie: {
+            title: "الفلسفة",
+            items: [
+              { title: "الأفكار", desc: "الأفريقية، الصينية، الهندية، اليونانية" },
+              { title: "المعتقدات", desc: "أصل المقدس، تاريخ الأديان" },
+              { title: "الأساطير", desc: "البطل ذو الألف وجه" },
+              { title: "الحكمة", desc: "الأعمدة الخمسة" }
+            ]
+          },
+          pouvoirs: {
+            title: "القوى",
+            items: [
+              "الاتصال بالقوى المفيدة",
+              "اكتشاف كيانك الداخلي",
+              "تطهير نفسك",
+              "إتقان عقلك",
+              "إيقاظ قدراتك المخفية",
+              "التأثير على بيئتك دون عمل جسدي",
+              "التجدد جسدياً",
+              "اكتساب صحة أفضل",
+              "زيادة متوقع عمرك",
+              "تحديد الأهداف وتحقيقها",
+              "الوصول إلى الرفاه المادي",
+              "تحسين نوعية حياتك",
+              "الوصول إلى التنوير الروحي",
+              "حماية نفسك من جميع المصائب بغض النظر عن مصدرها"
+            ],
+            more: "والمزيد..."
+          }
+        },
+        development: {
+          title: "تطوير القوى",
+          quote: "سيحصل جميع الباحثين عن التطور الروحي واكتساب القوى على تعاليم تمكنهم من اكتساب شخصية مغناطيسية ومشعة.",
+          cta: "ابدأ مبادرتك"
+        },
+        footerQuote: "التطهير الحقيقي، والوصول إلى أعلى حالات الوعي، واكتساب القوى الفاعلة.",
+        percentages: {
+          personality: "٨٥٪",
+          knowledge: "١٥٪"
+        }
       },
       "memberSpace": {
     "loading": "جار التحميل...",
@@ -3501,6 +3733,83 @@ formation: {
         myAccount: "Mein Konto",
         closeMenu: "Menü schließen",
         openMenu: "Menü öffnen"
+      }, enseignements: {
+        meta: {
+          title: "Initiatische Lehren | GOC",
+          description: "Initiatische Lehren zum Verändern Ihres Lebens - Großer Orden des Kreises"
+        },
+        hero: {
+          subtitle: "Initiatischer Pfad",
+          title: "Initiatische Lehren",
+          titleHighlight: "um Ihr Leben zu verändern"
+        },
+        introduction: {
+          quote: "Unabhängig von Alter, Geschlecht oder Kultur strebt jeder danach, im Leben erfolgreich zu sein. Um dies zu erreichen, müssen Sie die Kraft Ihrer positiven Energien und Qualitäten nutzen, um sich durchzusetzen und Erfolg zu haben.",
+          paragraph1: "Daher ist die beste Investition, die Sie tätigen können, wenn Sie erfolgreich sein wollen, die Nutzung Ihrer inneren Ausstrahlung - das heißt Ihrer wahren Persönlichkeit, Ihrer Stärken und Ihrer positiven Qualitäten.",
+          study: "Eine kürzliche amerikanische Studie zeigt, dass der Erfolg eines Individuums zu {{percentagePersonality}} von seiner Persönlichkeit abhängt; die verbleibenden {{percentageKnowledge}} repräsentieren sein Wissen und seine Erfahrung.",
+          conclusion: "{{goc}} gibt Ihnen die Schlüssel, um dies zu erreichen."
+        },
+        mainContent: {
+          title: "Die Lehren des GOC",
+          subtitle: "Philosophisches und ideologisches Wissen, äußerst mächtige Schlüssel und Techniken für den Erwerb von Kräften und die persönliche Entwicklung!"
+        },
+        pillars: {
+          esoterisme: {
+            title: "Esoterik",
+            items: [
+              "Der Begriff Gott",
+              "Kenntnis der Religionen",
+              "Unsterblichkeit",
+              "Man selbst sein",
+              "Das verzauberte Leben",
+              "Magnetismus",
+              "Humanismus",
+              "Ideologien",
+              "Leben, Existenz, Tod",
+              "Yin und Yang",
+              "Selbst und Anderes"
+            ]
+          },
+          philosophie: {
+            title: "Philosophie",
+            items: [
+              { title: "Gedanken", desc: "afrikanisch, chinesisch, indisch, griechisch" },
+              { title: "Glaubensvorstellungen", desc: "Ursprung des Heiligen, Geschichte der Religionen" },
+              { title: "Mythologien", desc: "Held mit tausend Gesichtern" },
+              { title: "Weisheit", desc: "die fünf Säulen" }
+            ]
+          },
+          pouvoirs: {
+            title: "Kräfte",
+            items: [
+              "Sich mit nützlichen Kräften verbinden",
+              "Sein inneres Wesen entdecken",
+              "Seine Psyche reinigen",
+              "Seinen Geist beherrschen",
+              "Seine verborgenen Fähigkeiten erwecken",
+              "Seine Umgebung ohne physisches Handeln beeinflussen",
+              "Sich physisch regenerieren",
+              "Sich eine bessere Gesundheit erwerben",
+              "Seine Lebenserwartung erhöhen",
+              "Sich Ziele setzen und sie erreichen",
+              "Materielles Wohlbefinden erreichen",
+              "Die Lebensqualität verbessern",
+              "Zum spirituellen Erwachen gelangen",
+              "Sich vor allen Unglücksfällen unabhängig von deren Ursprung schützen"
+            ],
+            more: "Und mehr..."
+          }
+        },
+        development: {
+          title: "Entwicklung der Kräfte",
+          quote: "Alle diejenigen, die nach spiritueller Evolution und dem Erwerb von Kräften streben, werden Lehren erhalten, die es ihnen ermöglichen, eine magnetische und strahlende Persönlichkeit zu erwerben.",
+          cta: "Beginnen Sie Ihre Initiation"
+        },
+        footerQuote: "Wahre Reinigung, Zugang zu den höchsten Bewusstseinszuständen und der Erwerb handelnder Kräfte.",
+        percentages: {
+          personality: "85%",
+          knowledge: "15%"
+        }
       },
       "memberSpace": {
     "loading": "Wird geladen...",
@@ -4626,7 +4935,85 @@ formation: {
         myAccount: "Mi cuenta",
         closeMenu: "Cerrar menú",
         openMenu: "Abrir menú"
-      },"memberSpace": {
+      },enseignements: {
+        meta: {
+          title: "Enseñanzas Iniciáticas | GOC",
+          description: "Enseñanzas iniciáticas para cambiar tu vida - Gran Orden del Círculo"
+        },
+        hero: {
+          subtitle: "Camino Iniciático",
+          title: "Enseñanzas Iniciáticas",
+          titleHighlight: "para cambiar tu vida"
+        },
+        introduction: {
+          quote: "Independientemente de la edad, el sexo o la cultura, todos aspiran a tener éxito en la vida. Para lograrlo, debes aprovechar la fuerza de tus energías positivas y cualidades para imponerte y tener éxito.",
+          paragraph1: "Por lo tanto, la mejor inversión que puedes hacer si quieres tener éxito es explotar tu resplandor interior, es decir, tu verdadera personalidad, tus fortalezas y tus cualidades positivas.",
+          study: "Un estudio estadounidense reciente muestra que el éxito de un individuo depende en un {{percentagePersonality}} de su personalidad; el {{percentageKnowledge}} restante representa su conocimiento y experiencia.",
+          conclusion: "{{goc}} te da las llaves para lograrlo."
+        },
+        mainContent: {
+          title: "Las Enseñanzas del GOC",
+          subtitle: "Conocimiento filosófico e ideológico, claves y técnicas extremadamente poderosas para la adquisición de poderes y el desarrollo personal!"
+        },
+        pillars: {
+          esoterisme: {
+            title: "Esoterismo",
+            items: [
+              "El concepto de Dios",
+              "Conocimiento de las religiones",
+              "La inmortalidad",
+              "Ser uno mismo",
+              "La vida encantada",
+              "El magnetismo",
+              "El humanismo",
+              "Las ideologías",
+              "La vida, la existencia, la muerte",
+              "El Yin y el Yang",
+              "El Yo y el Otro"
+            ]
+          },
+          philosophie: {
+            title: "Filosofía",
+            items: [
+              { title: "Pensamientos", desc: "africana, china, india, griega" },
+              { title: "Creencias", desc: "origen de lo sagrado, historia de las religiones" },
+              { title: "Mitologías", desc: "héroe de mil rostros" },
+              { title: "Sabiduría", desc: "los cinco pilares" }
+            ]
+          },
+          pouvoirs: {
+            title: "Poderes",
+            items: [
+              "Conectarse con las Fuerzas benéficas",
+              "Descubrir su Ser interior",
+              "Limpiar su psiquis",
+              "Dominar su mente",
+              "Despertar sus aptitudes ocultas",
+              "Influir en su entorno sin actuar físicamente",
+              "Regenerarse físicamente",
+              "Adquirir una mejor salud",
+              "Aumentar su esperanza de vida",
+              "Fijarse metas y alcanzarlas",
+              "Acceder al bienestar material",
+              "Mejorar la calidad de su vida",
+              "Acceder al Despertar Espiritual",
+              "Protegerse contra todos los golpes de la suerte cualquiera sea su origen"
+            ],
+            more: "Y más..."
+          }
+        },
+        development: {
+          title: "Desarrollo de los Poderes",
+          quote: "Todos aquellos que buscan la evolución espiritual y la adquisición de poderes recibirán enseñanzas que les permitirán adquirir una personalidad magnética y radiante.",
+          cta: "Comienza tu iniciación"
+        },
+        footerQuote: "Una verdadera purificación, el acceso a los estados de conciencia más elevados y la adquisición de poderes actuantes.",
+        percentages: {
+          personality: "85%",
+          knowledge: "15%"
+        }
+      },
+      "memberSpace": {
     "loading": "Cargando...",
     "noSubscription": {
       "title": "Sin Suscripción Activa",
@@ -5747,6 +6134,83 @@ formation: {
         myAccount: "Il mio account",
         closeMenu: "Chiudi menu",
         openMenu: "Apri menu"
+      },enseignements: {
+        meta: {
+          title: "Insegnamenti Iniziatici | GOC",
+          description: "Insegnamenti iniziatici per cambiare la tua vita - Grande Ordine del Cerchio"
+        },
+        hero: {
+          subtitle: "Via Iniziatica",
+          title: "Insegnamenti Iniziatici",
+          titleHighlight: "per cambiare la tua vita"
+        },
+        introduction: {
+          quote: "Indipendentemente dall'età, dal sesso o dalla cultura, tutti aspirano al successo nella vita. Per raggiungerlo, devi sfruttare la forza delle tue energie positive e delle tue qualità per imporre te stesso e avere successo.",
+          paragraph1: "Pertanto, il miglior investimento che puoi fare se vuoi avere successo è sfruttare il tuo bagliore interiore, cioè la tua vera personalità, i tuoi punti di forza e le tue qualità positive.",
+          study: "Un recente studio americano mostra che il successo di un individuo dipende per il {{percentagePersonality}} dalla sua personalità; il restante {{percentageKnowledge}} rappresenta la sua conoscenza e esperienza.",
+          conclusion: "{{goc}} ti dà le chiavi per raggiungere questo obiettivo."
+        },
+        mainContent: {
+          title: "Gli Insegnamenti del GOC",
+          subtitle: "Conoscenza filosofica e ideologica, chiavi e tecniche estremamente potenti per l'acquisizione dei poteri e lo sviluppo personale!"
+        },
+        pillars: {
+          esoterisme: {
+            title: "Esoterismo",
+            items: [
+              "Il concetto di Dio",
+              "Conoscenza delle religioni",
+              "L'immortalità",
+              "Essere se stessi",
+              "La vita incantata",
+              "Il magnetismo",
+              "L'umanesimo",
+              "Le ideologie",
+              "La vita, l'esistenza, la morte",
+              "Lo Yin e lo Yang",
+              "Il Sé e l'Altro"
+            ]
+          },
+          philosophie: {
+            title: "Filosofia",
+            items: [
+              { title: "Pensieri", desc: "africana, cinese, indiana, greca" },
+              { title: "Credenze", desc: "origine del sacro, storia delle religioni" },
+              { title: "Mitologie", desc: "eroe dai mille volti" },
+              { title: "Saggezza", desc: "i cinque pilastri" }
+            ]
+          },
+          pouvoirs: {
+            title: "Poteri",
+            items: [
+              "Connettersi alle Forze benefiche",
+              "Scoprire il proprio Essere interiore",
+              "Purificare la propria psiche",
+              "Dominare la propria mente",
+              "Risvegliare le proprie capacità nascoste",
+              "Influenzare il proprio ambiente senza agire fisicamente",
+              "Rigenerarsi fisicamente",
+              "Acquisire una migliore salute",
+              "Aumentare la propria aspettativa di vita",
+              "Fissarsi obiettivi e raggiungerli",
+              "Accedere al benessere materiale",
+              "Migliorare la qualità della propria vita",
+              "Accedere al Risveglio Spirituale",
+              "Proteggersi da tutti i colpi di sfortuna qualunque ne sia l'origine"
+            ],
+            more: "E altro ancora..."
+          }
+        },
+        development: {
+          title: "Sviluppo dei Poteri",
+          quote: "Tutti coloro che cercano l'evoluzione spirituale e l'acquisizione dei poteri riceveranno insegnamenti che gli permetteranno di acquisire una personalità magnetica e radiosa.",
+          cta: "Inizia la tua iniziazione"
+        },
+        footerQuote: "Una vera purificazione, l'accesso agli stati di coscienza più elevati e l'acquisizione di poteri agenti.",
+        percentages: {
+          personality: "85%",
+          knowledge: "15%"
+        }
       },
       "memberSpace": {
     "loading": "Caricamento...",
@@ -6869,6 +7333,83 @@ formation: {
         myAccount: "Minha conta",
         closeMenu: "Fechar menu",
         openMenu: "Abrir menu"
+      },enseignements: {
+        meta: {
+          title: "Ensinamentos Iniciáticos | GOC",
+          description: "Ensinamentos iniciáticos para mudar sua vida - Grande Ordem do Círculo"
+        },
+        hero: {
+          subtitle: "Caminho Iniciático",
+          title: "Ensinamentos Iniciáticos",
+          titleHighlight: "para mudar sua vida"
+        },
+        introduction: {
+          quote: "Independentemente da idade, sexo ou cultura, todos aspiram ao sucesso na vida. Para alcançá-lo, você deve aproveitar a força de suas energias positivas e qualidades para se impor e ter sucesso.",
+          paragraph1: "Portanto, o melhor investimento que você pode fazer se quiser ter sucesso é explorar seu brilho interior - ou seja, sua verdadeira personalidade, suas forças e suas qualidades positivas.",
+          study: "Um estudo americano recente mostra que o sucesso de um indivíduo depende em {{percentagePersonality}} de sua personalidade; os {{percentageKnowledge}} restantes representam seu conhecimento e experiência.",
+          conclusion: "{{goc}} lhe dá as chaves para alcançar isso."
+        },
+        mainContent: {
+          title: "Os Ensinamentos do GOC",
+          subtitle: "Conhecimento filosófico e ideológico, chaves e técnicas extremamente poderosas para a aquisição de poderes e desenvolvimento pessoal!"
+        },
+        pillars: {
+          esoterisme: {
+            title: "Esoterismo",
+            items: [
+              "O conceito de Deus",
+              "Conhecimento das religiões",
+              "A imortalidade",
+              "Ser si mesmo",
+              "A vida encantada",
+              "O magnetismo",
+              "O humanismo",
+              "As ideologias",
+              "A vida, a existência, a morte",
+              "O Yin e o Yang",
+              "O Eu e o Outro"
+            ]
+          },
+          philosophie: {
+            title: "Filosofia",
+            items: [
+              { title: "Pensamentos", desc: "africana, chinesa, indiana, grega" },
+              { title: "Crenças", desc: "origem do sagrado, história das religiões" },
+              { title: "Mitologias", desc: "herói com mil faces" },
+              { title: "Sabedoria", desc: "os cinco pilares" }
+            ]
+          },
+          pouvoirs: {
+            title: "Poderes",
+            items: [
+              "Conectar-se às Forças benéficas",
+              "Descobrir seu Ser interior",
+              "Limpar sua psique",
+              "Dominar sua mente",
+              "Despertar suas aptidões ocultas",
+              "Influenciar seu meio sem agir fisicamente",
+              "Regenerar-se fisicamente",
+              "Adquirir uma melhor saúde",
+              "Aumentar sua expectativa de vida",
+              "Fixar metas e alcançá-las",
+              "Acessar o bem-estar material",
+              "Melhorar a qualidade de sua vida",
+              "Acessar o Despertar Espiritual",
+              "Proteger-se contra todos os golpes do destino qualquer que seja sua origem"
+            ],
+            more: "E mais..."
+          }
+        },
+        development: {
+          title: "Desenvolvimento dos Poderes",
+          quote: "Todos aqueles que buscam a evolução espiritual e a aquisição de poderes receberão ensinamentos que lhes permitirão adquirir uma personalidade magnética e radiante.",
+          cta: "Comece sua iniciação"
+        },
+        footerQuote: "Uma verdadeira purificação, o acesso aos estados de consciência mais elevados e a aquisição de poderes atuantes.",
+        percentages: {
+          personality: "85%",
+          knowledge: "15%"
+        }
       },
       "memberSpace": {
     "loading": "Carregando...",
@@ -7991,7 +8532,84 @@ formation: {
         myAccount: "我的账户",
         closeMenu: "关闭菜单",
         openMenu: "打开菜单"
-      }, "memberSpace": {
+      }, enseignements: {
+        meta: {
+          title: "入门教诲 | GOC",
+          description: "改变你生命的入门教诲 - 大圆秩序"
+        },
+        hero: {
+          subtitle: "入门之道",
+          title: "入门教诲",
+          titleHighlight: "改变你的生命"
+        },
+        introduction: {
+          quote: "无论年龄、性别或文化，每个人都渴望在生活中取得成功。要实现这一目标，你必须利用你积极的能量和品质的力量来确立自己并取得成功。",
+          paragraph1: "因此，如果你想取得成功，你能做的最好投资就是利用你内在的光芒——也就是说，你真实的个性、你的力量和你的积极品质。",
+          study: "最近的一项美国研究表明，一个人的成功{{percentagePersonality}}取决于他的个性；剩余的{{percentageKnowledge}}代表他的知识和经验。",
+          conclusion: "{{goc}}给你实现这一目标的钥匙。"
+        },
+        mainContent: {
+          title: "GOC的教诲",
+          subtitle: "哲学和意识形态知识、获取力量和个人发展的极其强大的关键和技术！"
+        },
+        pillars: {
+          esoterisme: {
+            title: "神秘主义",
+            items: [
+              "上帝的概念",
+              "宗教知识",
+              "不朽",
+              "做自己",
+              "迷人的生活",
+              "磁力",
+              "人道主义",
+              "意识形态",
+              "生命、存在、死亡",
+              "阴阳",
+              "自我与他者"
+            ]
+          },
+          philosophie: {
+            title: "哲学",
+            items: [
+              { title: "思想", desc: "非洲、中国、印度、希腊" },
+              { title: "信仰", desc: "神圣的起源，宗教历史" },
+              { title: "神话", desc: "千面英雄" },
+              { title: "智慧", desc: "五大支柱" }
+            ]
+          },
+          pouvoirs: {
+            title: "力量",
+            items: [
+              "连接有益的力量",
+              "发现你的内在存在",
+              "净化你的心灵",
+              "掌控你的思想",
+              "唤醒你隐藏的能力",
+              "无需身体行动就能影响你的环境",
+              "身体再生",
+              "获得更好的健康",
+              "增加你的预期寿命",
+              "设定目标并实现它们",
+              "获得物质福祉",
+              "改善你的生活质量",
+              "获得灵性觉醒",
+              "保护自己免受无论来源如何的所有不幸"
+            ],
+            more: "还有更多..."
+          }
+        },
+        development: {
+          title: "力量的发展",
+          quote: "所有寻求灵性进化和力量获取的人都将接受教诲，使他们能够获得磁性而光辉的个性。",
+          cta: "开始你的入门"
+        },
+        footerQuote: "真正的净化，进入最高的意识状态，获取行动的力量。",
+        percentages: {
+          personality: "85%",
+          knowledge: "15%"
+        }
+      },"memberSpace": {
     "loading": "加载中...",
     "noSubscription": {
       "title": "无有效订阅",
@@ -9112,6 +9730,83 @@ formation: {
         myAccount: "マイアカウント",
         closeMenu: "メニューを閉じる",
         openMenu: "メニューを開く"
+      },enseignements: {
+        meta: {
+          title: "入会式教え | GOC",
+          description: "人生を変える入会式教え - 大円秩序"
+        },
+        hero: {
+          subtitle: "入会の道",
+          title: "入会式教え",
+          titleHighlight: "人生を変えるために"
+        },
+        introduction: {
+          quote: "年齢、性別、文化に関わらず、誰もが人生で成功することを望んでいます。これを達成するには、ポジティブなエネルギーと資質の力を活用して、自分を主張し、成功を収める必要があります。",
+          paragraph1: "したがって、成功したいと思うなら、できる最高の投資は、内なる輝き—つまり、あなたの真の個性、強み、ポジティブな資質—を活用することです。",
+          study: "最近のアメリカの研究によると、個人の成功は{{percentagePersonality}}が個性に依存しており、残りの{{percentageKnowledge}}は知識と経験を表しています。",
+          conclusion: "{{goc}}はそれを達成するための鍵を与えてくれます。"
+        },
+        mainContent: {
+          title: "GOCの教え",
+          subtitle: "哲学的・イデオロギー的知識、力の獲得と個人の発展のための極めて強力な鍵と技術！"
+        },
+        pillars: {
+          esoterisme: {
+            title: "秘教",
+            items: [
+              "神の概念",
+              "宗教の知識",
+              "不死",
+              "自分自身であること",
+              "魅惑的な人生",
+              "磁気",
+              "人道主義",
+              "イデオロギー",
+              "生命、存在、死",
+              "陰と陽",
+              "自己と他者"
+            ]
+          },
+          philosophie: {
+            title: "哲学",
+            items: [
+              { title: "思想", desc: "アフリカ、中国、インド、ギリシャ" },
+              { title: "信仰", desc: "神聖の起源、宗教の歴史" },
+              { title: "神話", desc: "千の顔を持つ英雄" },
+              { title: "知恵", desc: "五つの柱" }
+            ]
+          },
+          pouvoirs: {
+            title: "力",
+            items: [
+              "有益な力と繋がる",
+              "内なる存在を発見する",
+              "精神を浄化する",
+              "心を支配する",
+              "隠れた能力を目覚めさせる",
+              "物理的な行動なしに環境に影響を与える",
+              "身体的に再生する",
+              "より良い健康を得る",
+              "平均寿命を延ばす",
+              "目標を設定し、達成する",
+              "物質的な福祉にアクセスする",
+              "生活の質を向上させる",
+              "精神的目覚めにアクセスする",
+              "起源に関わらず、あらゆる不運から身を守る"
+            ],
+            more: "さらに..."
+          }
+        },
+        development: {
+          title: "力の発展",
+          quote: "精神的進化と力の獲得を求めるすべての人は、磁気的で輝かしい個性を獲得できる教えを受けるでしょう。",
+          cta: "あなたの入会を始める"
+        },
+        footerQuote: "真の浄化、最高の意識状態へのアクセス、行動する力の獲得。",
+        percentages: {
+          personality: "85%",
+          knowledge: "15%"
+        }
       },
       "memberSpace": {
     "loading": "読み込み中...",

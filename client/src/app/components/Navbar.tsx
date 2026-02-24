@@ -21,6 +21,7 @@ export function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [activeItem, setActiveItem] = useState<string | null>(null);
+  const [imageError, setImageError] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -112,16 +113,27 @@ export function Navbar() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <Link to="/" className="flex items-center gap-3 group relative">
-            <div className="relative">
-              <img src={logo} alt="GOC" className="h-12 w-12 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" />
-              <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <Link to="/" className="flex items-center gap-3 group relative flex-shrink-0">
+            <div className="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
+              {!imageError ? (
+                <img 
+                  src={logo} 
+                  alt="GOC" 
+                  className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" 
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                <div className="w-full h-full bg-amber-100 rounded-full flex items-center justify-center text-amber-800 font-bold text-lg">
+                  GOC
+                </div>
+              )}
+              <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             </div>
-            <div className="flex flex-col">
-              <span className="font-serif text-2xl font-bold bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text text-transparent tracking-tight">
+            <div className="flex flex-col hidden sm:flex">
+              <span className="font-serif text-2xl font-bold bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text text-transparent tracking-tight leading-none">
                 GOC
               </span>
-              <span className="text-xs text-amber-700/60 font-medium tracking-widest uppercase">
+              <span className="text-[10px] text-amber-700/60 font-medium tracking-wider uppercase mt-1">
                 {t('nav.gocSubtitle')}
               </span>
             </div>
@@ -135,13 +147,14 @@ export function Navbar() {
                 onMouseEnter={() => handleMouseEnter(item.key)}
                 onMouseLeave={handleMouseLeave}
               >
-                <button className={`relative px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 flex items-center gap-2 group ${
+                <button className={`relative px-3 py-2 rounded-full font-medium text-sm transition-all duration-300 flex items-center gap-1.5 group whitespace-nowrap ${
                   activeItem === item.key ? "text-amber-800 bg-amber-100/50" : "text-gray-600 hover:text-amber-700 hover:bg-amber-50"
                 }`}>
                   <span className={`transition-transform duration-300 ${activeItem === item.key ? "scale-110" : "group-hover:scale-110"}`}>
                     {navIcons[item.key]}
                   </span>
-                  {item.label}
+                  <span className="hidden xl:inline">{item.label}</span>
+                  <span className="xl:hidden">{item.label.split(' ')[0]}</span>
                   <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${openDropdown === item.key ? "rotate-180" : ""}`} />
                   <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-amber-600 transition-all duration-300 ${
                     activeItem === item.key ? "opacity-100 scale-100" : "opacity-0 scale-0"
@@ -179,38 +192,41 @@ export function Navbar() {
               </div>
             ))}
             
-            <div className="h-6 w-px bg-amber-200 mx-2" />
+            <div className="h-6 w-px bg-amber-200 mx-1" />
             
-            <Link to="/espace-membre" className="px-4 py-2 rounded-full font-medium text-sm text-amber-700 hover:text-amber-800 hover:bg-amber-100 transition-all duration-300 flex items-center gap-2">
+            <Link to="/espace-membre" className="px-3 py-2 rounded-full font-medium text-sm text-amber-700 hover:text-amber-800 hover:bg-amber-100 transition-all duration-300 flex items-center gap-1.5 whitespace-nowrap">
               <Users className="w-4 h-4" />
-              {t('nav.members')}
+              <span className="hidden xl:inline">{t('nav.members')}</span>
             </Link>
           </div>
 
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher />
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="hidden sm:block">
+              <LanguageSwitcher />
+            </div>
             
             <SignedIn>
-              <div className="flex items-center gap-3 pl-4 border-l border-amber-200">
-                <span className="text-sm text-gray-500 hidden xl:block">{t('nav.myAccount')}</span>
-                <UserButton afterSignOutUrl="/" appearance={{ elements: { avatarBox: "w-10 h-10 ring-2 ring-amber-200 ring-offset-2", userButtonPopoverCard: "shadow-2xl shadow-amber-900/10 border-amber-100" } }} />
+              <div className="flex items-center gap-2 pl-2 sm:pl-3 border-l border-amber-200">
+                <span className="text-sm text-gray-500 hidden 2xl:block">{t('nav.myAccount')}</span>
+                <UserButton afterSignOutUrl="/" appearance={{ elements: { avatarBox: "w-9 h-9 sm:w-10 sm:h-10 ring-2 ring-amber-200 ring-offset-2", userButtonPopoverCard: "shadow-2xl shadow-amber-900/10 border-amber-100" } }} />
               </div>
             </SignedIn>
             
             <SignedOut>
-              <div className="hidden sm:flex items-center gap-2">
-                <Link to="/sign-in">
-                  <Button variant="ghost" className="text-gray-600 hover:text-amber-700 hover:bg-amber-50 rounded-full px-6">{t('nav.login')}</Button>
+              <div className="hidden md:flex items-center gap-2 pl-2 sm:pl-3 border-l border-amber-200">
+                <Link to="/sign-in" className="hidden lg:block">
+                  <Button variant="ghost" className="text-gray-600 hover:text-amber-700 hover:bg-amber-50 rounded-full px-4 lg:px-6 text-sm">{t('nav.login')}</Button>
                 </Link>
                 <Link to="/sign-up">
-                  <Button className="bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-800 hover:to-amber-700 text-white rounded-full px-6 shadow-lg shadow-amber-900/20 hover:shadow-amber-900/30 transition-all duration-300 hover:-translate-y-0.5">
-                    {t('nav.signup')}
+                  <Button className="bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-800 hover:to-amber-700 text-white rounded-full px-4 sm:px-6 shadow-lg shadow-amber-900/20 hover:shadow-amber-900/30 transition-all duration-300 hover:-translate-y-0.5 text-sm whitespace-nowrap">
+                    <span className="hidden sm:inline">{t('nav.signup')}</span>
+                    <span className="sm:hidden">{t('nav.signupShort') || t('nav.signup')}</span>
                   </Button>
                 </Link>
               </div>
             </SignedOut>
 
-            <button className="lg:hidden p-2 rounded-full hover:bg-amber-50 transition-colors" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')}>
+            <button className="lg:hidden p-2 rounded-full hover:bg-amber-50 transition-colors flex-shrink-0" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? t('nav.closeMenu') : t('nav.openMenu')}>
               {mobileMenuOpen ? <X className="w-6 h-6 text-amber-800" /> : <Menu className="w-6 h-6 text-gray-700" />}
             </button>
           </div>
@@ -225,6 +241,10 @@ export function Navbar() {
         mobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0 pointer-events-none"
       }`}>
         <div className="p-4 space-y-2">
+          <div className="sm:hidden pb-4 border-b border-amber-100">
+            <LanguageSwitcher />
+          </div>
+          
           {navigationItems.map((item) => (
             <div key={item.key} className="border-b border-amber-50 last:border-0 pb-2">
               <button onClick={() => setOpenDropdown(openDropdown === item.key ? null : item.key)} className={`w-full text-left px-4 py-4 rounded-xl font-medium flex items-center justify-between transition-all duration-300 ${
@@ -248,12 +268,14 @@ export function Navbar() {
               </div>
             </div>
           ))}
+          
           <Link to="/espace-membre" className="flex items-center gap-3 px-4 py-4 rounded-xl text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition-colors font-medium" onClick={() => setMobileMenuOpen(false)}>
             <Users className="w-5 h-5" />
             {t('nav.members')}
           </Link>
+          
           <SignedOut>
-            <div className="pt-4 space-y-3 px-4">
+            <div className="pt-4 space-y-3 px-4 md:hidden">
               <Link to="/sign-in" className="block">
                 <Button variant="outline" className="w-full rounded-xl border-amber-200 text-amber-700 hover:bg-amber-50">{t('nav.login')}</Button>
               </Link>

@@ -50,6 +50,7 @@ import { SignInPage } from "./pages/SignInPage";
 import { SignUpPage } from "./pages/SignUpPage";
 import { Success } from "./pages/Success";
 import { RequireClerkAuth } from "@/auth/RequireClerkAuth";
+import { Enseignements } from "./pages/Enseignements";
 
 export default function App() {
   return (
@@ -60,6 +61,7 @@ export default function App() {
         <Routes>
           {/* Public */}
           <Route path="/" element={<Home />} />
+          <Route path="/enseignements" element={<Enseignements />} />
 
           {/* Auth */}
           <Route path="/sign-in" element={<SignInPage />} />
@@ -147,7 +149,6 @@ export default function App() {
               <Videos />
             </RequireClerkAuth>
           } />
-
           {/* Member-only (requires any active subscription) */}
           <Route
             path="/espace-membre"

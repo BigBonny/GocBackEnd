@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import formation from "@/assets/VisuelGoc4.png"
 
@@ -62,21 +63,24 @@ export function Formation() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-            <div className="text-4xl mb-3">📖</div>
-            <h3 className="text-xl font-serif text-amber-900 mb-2">Enseignements</h3>
+          <Link 
+            to="/enseignements"
+            className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group border border-amber-100"
+          >
+            <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">📖</div>
+            <h3 className="text-xl font-serif text-amber-900 mb-2 group-hover:text-amber-700 transition-colors">Enseignements</h3>
             <p className="text-gray-600">Accès à notre bibliothèque de connaissances ésotériques</p>
-          </div>
+          </Link>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-            <div className="text-4xl mb-3">🎓</div>
-            <h3 className="text-xl font-serif text-amber-900 mb-2">Progression</h3>
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group border border-amber-100">
+            <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">🎓</div>
+            <h3 className="text-xl font-serif text-amber-900 mb-2 group-hover:text-amber-700 transition-colors">Progression</h3>
             <p className="text-gray-600">Un parcours structuré vers la maîtrise spirituelle</p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-            <div className="text-4xl mb-3">✨</div>
-            <h3 className="text-xl font-serif text-amber-900 mb-2">Initiation</h3>
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group border border-amber-100">
+            <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">✨</div>
+            <h3 className="text-xl font-serif text-amber-900 mb-2 group-hover:text-amber-700 transition-colors">Initiation</h3>
             <p className="text-gray-600">Rituels sacrés et cérémonies d'élévation</p>
           </div>
         </div>
