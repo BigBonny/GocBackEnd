@@ -46,11 +46,11 @@ export function BibliothèqueVideos() {
             <p className="text-gray-700 leading-relaxed mb-4">
               {t('library.intro.description')}
             </p>
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <button className="bg-amber-700 text-white px-6 py-2 rounded-lg hover:bg-amber-800 transition">
                 {t('library.intro.orderForm')}
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -138,9 +138,9 @@ export function BibliothèqueVideos() {
           <p className="mb-6 max-w-2xl mx-auto">
             {t('library.videos.cta.description')}
           </p>
-          <button className="bg-white text-amber-700 px-8 py-3 rounded-md hover:bg-amber-50 transition font-medium">
+          {/* <button className="bg-white text-amber-700 px-8 py-3 rounded-md hover:bg-amber-50 transition font-medium">
             {t('library.videos.cta.button')}
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

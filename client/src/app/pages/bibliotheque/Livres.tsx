@@ -81,11 +81,11 @@ export function Livres() {
             <p className="text-gray-700 leading-relaxed mb-6 text-lg">
               {t('library.intro.description')}
             </p>
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <button className="bg-amber-700 text-white px-6 py-2 rounded-lg hover:bg-amber-800 transition">
                 {t('library.intro.orderForm')}
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 

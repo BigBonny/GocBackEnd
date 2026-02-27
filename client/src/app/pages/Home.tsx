@@ -5,6 +5,9 @@ import egypt from "@/assets/symboleegyptien1.jpg";
 import goc1 from "@/assets/visuelGoc1.jpg";
 import goc2 from "@/assets/VisuelGoc2.jpg";
 import goc4 from "@/assets/VisuelGoc4.png";
+import visuelGoc3 from "../../assets/visuelGoc3.jpg";
+import visuelGoc4Bis from "../../assets/visuelGoc4Bis.jpg";
+import visuelGocTer from "../../assets/visuelGocTer.jpg";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 import {
@@ -102,6 +105,9 @@ export function Home() {
                 { src: goc2, alt: t('home.carousel.prieure'), label: t('home.carousel.prieure') },
                 { src: goc4, alt: t('home.carousel.group'), label: t('home.carousel.group') },
                 { src: goc1, alt: t('home.carousel.symbols'), label: t('home.carousel.symbols') },
+                { src: visuelGoc3, alt: t('home.carousel.symbols')},
+                { src: visuelGoc4Bis, alt: t('home.carousel.symbols')},
+                { src: visuelGocTer, alt: t('home.carousel.symbols')},
               ].map((slide, idx) => (
                 <CarouselItem key={idx}>
                   <div className="rounded-2xl overflow-hidden shadow-2xl bg-white group">

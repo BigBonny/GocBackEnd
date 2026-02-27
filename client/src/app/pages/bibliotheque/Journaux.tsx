@@ -40,11 +40,11 @@ export function Journaux() {
             <p className="text-gray-700 leading-relaxed mb-4">
               {t('library.intro.description')}
             </p>
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <button className="bg-amber-700 text-white px-6 py-2 rounded-lg hover:bg-amber-800 transition">
                 {t('library.intro.orderForm')}
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -135,14 +135,14 @@ export function Journaux() {
           <p className="mb-6 max-w-2xl mx-auto">
             {t('library.journals.cta.description')}
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          {/* <div className="flex flex-wrap gap-4 justify-center">
             <button className="bg-white text-amber-700 px-8 py-3 rounded-md hover:bg-amber-50 transition font-medium">
               {t('library.journals.cta.becomeMember')}
             </button>
             <button className="bg-amber-800 text-white px-8 py-3 rounded-md hover:bg-amber-900 transition font-medium border-2 border-white">
               {t('library.journals.cta.consultArchives')}
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
