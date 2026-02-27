@@ -1,4 +1,5 @@
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import fraternite from "../../assets/VisuelGoc4Bis.jpg"
 
 export function Fraternite() {
   return (
@@ -10,7 +11,7 @@ export function Fraternite() {
 
         <div className="grid md:grid-cols-2 gap-12 mb-12">
           <ImageWithFallback
-            src="https://images.unsplash.com/photo-1641587072431-03b5b6dffced?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncm91cCUyMHBlb3BsZSUyMHNwaXJpdHVhbHxlbnwxfHx8fDE3NjkwMTI4NDV8MA&ixlib=rb-4.1.0&q=80&w=1080"
+            src = {fraternite}
             alt="Fraternité"
             className="w-full h-96 object-cover rounded-lg shadow-xl"
           />

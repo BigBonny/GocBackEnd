@@ -1,4 +1,5 @@
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import seminaire from '../../assets/VisuelGoc4.png'
 
 export function Seminaires() {
   const seminaires = [
@@ -16,7 +17,7 @@ export function Seminaires() {
 
         <div className="mb-12">
           <ImageWithFallback
-            src="https://images.unsplash.com/photo-1659439902271-8a310f0edeca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcGlyaXR1YWwlMjBzZW1pbmFyJTIwbWVkaXRhdGlvbnxlbnwxfHx8fDE3NjkwMTI4NDR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+            src={seminaire}
             alt="Séminaires"
             className="w-full h-96 object-cover rounded-lg shadow-xl"
           />
