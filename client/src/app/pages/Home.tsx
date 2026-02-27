@@ -5,9 +5,9 @@ import egypt from "@/assets/symboleegyptien1.jpg";
 import goc1 from "@/assets/visuelGoc1.jpg";
 import goc2 from "@/assets/VisuelGoc2.jpg";
 import goc4 from "@/assets/VisuelGoc4.png";
-import visuelGoc3 from "../../assets/visuelGoc3.jpg";
-import visuelGoc4Bis from "../../assets/visuelGoc4Bis.jpg";
-import visuelGocTer from "../../assets/visuelGocTer.jpg";
+import visuelGoc3 from "../../assets/VisuelGoc3.jpg";
+import visuelGoc4Bis from "../../assets/VisuelGoc4Bis.jpg";
+import visuelGocTer from "../../assets/VisuelGocTer.jpg";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 import {
