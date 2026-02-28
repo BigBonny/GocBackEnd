@@ -15,8 +15,7 @@ export function Contact() {
               <div className="flex items-start gap-3">
                 <span className="text-2xl">📍</span>
                 <div>
-                  <p className="font-medium text-amber-900">Siège Principal</p>
-                  <p>Goc France</p>
+                  <p className="font-medium text-amber-900">Goc France</p>
                   <p>Richard Mbouma Kohomm</p>
                   <p>11 Avenue Joseph Rollo, France</p>
                 </div>
