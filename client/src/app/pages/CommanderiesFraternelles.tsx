@@ -1,11 +1,20 @@
+import { Link } from "react-router-dom";
+import logo from "@/assets/logoGOC.png";
+import africaMap from "@/assets/maps/africa.png";
+import americasMap from "@/assets/maps/americas.png";
+import asiaMap from "@/assets/maps/asia.png";
+import europeMap from "@/assets/maps/europe.png";
+import mideastMap from "@/assets/maps/mideast.png";
+import oceaniaMap from "@/assets/maps/oceania.png";
+
 export function CommanderiesFraternelles() {
   const commanderies = [
-    { nom: "Commanderie de Paris", ville: "Paris", membres: 45 },
-    { nom: "Commanderie de Lyon", ville: "Lyon", membres: 32 },
-    { nom: "Commanderie de Bordeaux", ville: "Bordeaux", membres: 28 },
-    { nom: "Commanderie de Marseille", ville: "Marseille", membres: 38 },
-    { nom: "Commanderie de Toulouse", ville: "Toulouse", membres: 25 },
-    { nom: "Commanderie de Nantes", ville: "Nantes", membres: 22 },
+    { nom: "Commanderies Afriques", ville: "Yaoundé", membres: 54, map: africaMap, flag:'🌍' },
+    { nom: "Commanderies Ameriques", ville: "Boston", membres: 35, map: americasMap, flag:'🌎' },
+    { nom: "Commanderies Asie", ville: " ", membres: 48, map: asiaMap, flag:'🌏' },
+    { nom: "Commanderies Europe", ville: "Paris", membres: 44, map: europeMap, flag:'🇪🇺' },
+    { nom: "Commanderies Moyen-Orient", ville: " ", membres: 20, map: mideastMap, flag:'🕌' },
+    { nom: "Commanderies Oceanie", ville: "Australie", membres: 14, map: oceaniaMap, flag:'🏝️' },
   ];
 
   return (
@@ -22,22 +31,43 @@ export function CommanderiesFraternelles() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {commanderies.map((cmd, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-lg p-6">
-              <div className="h-16 w-16 mx-auto mb-4 bg-amber-100 rounded-full flex items-center justify-center">
-                <span className="text-3xl">⚜️</span>
+            <div 
+              key={index} 
+              className="bg-white rounded-lg shadow-lg overflow-hidden relative group flex flex-col"
+            >
+              {/* Map Background */}
+              <div 
+                className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500 bg-cover bg-center"
+                style={{ backgroundImage: `url(${cmd.map})` }}
+              />
+              
+              <div className="relative z-10 p-6 flex flex-col flex-grow">
+                <div className="h-20 w-20 mx-auto mb-4 rounded-full flex items-center justify-center overflow-hidden bg-white/80 backdrop-blur-sm shadow-md">
+                  <img 
+                    src={logo} 
+                    alt="Logo GOC" 
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                
+                <h3 className="text-xl font-serif text-amber-900 mb-2 text-center">{cmd.nom}</h3>
+                
+                <div className="text-center text-gray-600 space-y-1 flex-grow">
+                  <p className="flex items-center justify-center gap-2 font-medium min-h-[1.5rem]">
+                    {cmd.ville.trim() || "\u00A0"}
+                  </p>
+                  <p className="flex items-center justify-center gap-2 text-sm">
+                    <span className="text-amber-600">{cmd.flag}</span> {cmd.membres} membres
+                  </p>
+                </div>
+                
+                <Link 
+                  to="/contact"
+                  className="w-full mt-4 bg-amber-700 text-white py-2 rounded-md hover:bg-amber-800 transition shadow-md text-center block"
+                >
+                  Contacter
+                </Link>
               </div>
-              <h3 className="text-xl font-serif text-amber-900 mb-2 text-center">{cmd.nom}</h3>
-              <div className="text-center text-gray-600 space-y-1">
-                <p className="flex items-center justify-center gap-2">
-                  <span>📍</span> {cmd.ville}
-                </p>
-                <p className="flex items-center justify-center gap-2">
-                  <span>👥</span> {cmd.membres} membres
-                </p>
-              </div>
-              <button className="w-full mt-4 bg-amber-700 text-white py-2 rounded-md hover:bg-amber-800 transition">
-                Contacter
-              </button>
             </div>
           ))}
         </div>
@@ -49,9 +79,12 @@ export function CommanderiesFraternelles() {
           <p className="text-gray-700 mb-6">
             Intéressé à établir une commanderie dans votre région ? Contactez-nous pour en savoir plus.
           </p>
-          <button className="bg-amber-700 text-white px-8 py-3 rounded-md hover:bg-amber-800 transition font-medium">
+          <Link 
+            to="/contact"
+            className="inline-block bg-amber-700 text-white px-8 py-3 rounded-md hover:bg-amber-800 transition font-medium"
+          >
             Nous Contacter
-          </button>
+          </Link>
         </div>
       </div>
     </div>

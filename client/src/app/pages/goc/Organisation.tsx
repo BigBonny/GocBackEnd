@@ -7,11 +7,11 @@ export function Organisation() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       {/* Top motto */}
-      <div className="bg-[#7A3A2E] text-[#F4EFE8] text-center py-12">
-        <p className="text-md md:text-xl italic font-serif">
-          {t('organisation.motto')}
-        </p>
-      </div>
+      <div className="bg-[#7A3A2E] text-[#F4EFE8] text-center py-6 md:py-3 px-4">
+  <p className="text-lg md:text-2xl lg:text-3xl italic font-body tracking-wider leading-relaxed max-w-5xl mx-auto">
+    {t('home.motto')}
+  </p>
+</div>
 
       <div className="max-w-5xl mx-auto px-4 py-12">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-amber-900 mb-8 text-center">

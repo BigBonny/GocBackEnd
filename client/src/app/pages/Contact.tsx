@@ -16,9 +16,9 @@ export function Contact() {
                 <span className="text-2xl">📍</span>
                 <div>
                   <p className="font-medium text-amber-900">Siège Principal</p>
-                  <p>Grand Ordre du Cercle</p>
-                  <p>123 Rue de la Sagesse</p>
-                  <p>75001 Paris, France</p>
+                  <p>Goc France</p>
+                  <p>Richard Mbouma Kohomm</p>
+                  <p>11 Avenue Joseph Rollo, France</p>
                 </div>
               </div>
 
@@ -27,7 +27,7 @@ export function Contact() {
                 <div>
                   <p className="font-medium text-amber-900">Email</p>
                   <a href="mailto:contact@goc.org" className="text-amber-700 hover:text-amber-800">
-                    contact@goc.org
+                    contact@goc-fraternity.org
                   </a>
                 </div>
               </div>
@@ -36,8 +36,8 @@ export function Contact() {
                 <span className="text-2xl">📞</span>
                 <div>
                   <p className="font-medium text-amber-900">Téléphone</p>
-                  <a href="tel:+33123456789" className="text-amber-700 hover:text-amber-800">
-                    +33 1 23 45 67 89
+                  <a href="tel:+33662050237" className="text-amber-700 hover:text-amber-800">
+                    +33 6 62 05 02 37
                   </a>
                 </div>
               </div>
