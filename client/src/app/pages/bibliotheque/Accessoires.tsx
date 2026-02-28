@@ -4,7 +4,7 @@ import Imagebib1 from '../../../assets/Imagebib1.jpg';
 import Imagebib2 from '../../../assets/Imagebib2.jpg';
 import Imagebib3 from '../../../assets/Imagebib3.jpg';
 import Imagebib4 from '../../../assets/Imagebib4.jpg';
-import Imagebibbis from '../../../assets/Imagebibbis.jpg';
+import Imagebibbis from '../../../assets/imagebibbis.jpg';
 
 export function Accessoires() {
   const { t } = useTranslation();
